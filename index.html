@@ -279,7 +279,7 @@
     <!-- ============================================================
      SECTION 1 — HERO (unchanged main from 1.hero)
      ============================================================ -->
-    <main class="flex items-center justify-center relative overflow-hidden min-h-[calc(100vh-6.5rem)]">
+    <main class="flex items-center justify-center relative overflow-hidden min-h-[calc(75vh-6.5rem)] py-12">
         <!-- Ambient Background Depth -->
         <div class="ambient-glow"></div>
         <!-- Abstract Architectural Background Elements -->
@@ -345,170 +345,146 @@
     <!-- ============================================================
      SECTION 2 — CASES (unchanged main from 2.cases)
      ============================================================ -->
-    <main class="pt-32 pb-24 max-w-7xl mx-auto px-4 sm:px-8">
+    <main class="pt-6 pb-10 max-w-7xl mx-auto px-4 sm:px-8">
         <!-- Section Header -->
-        <div class="mb-20 max-w-3xl border-l-2 border-primary-container pl-8 py-2">
-            <h1 class="font-headline text-4xl md:text-6xl text-on-surface tracking-tight mb-6 leading-[0.95]">The
+        <div class="mb-12 max-w-3xl border-l-2 border-primary-container pl-8 py-1">
+            <h1 class="font-headline text-4xl md:text-6xl text-on-surface tracking-tight mb-3 leading-[0.95]">The
                 deployed <br />
                 <span class="italic text-on-surface-variant font-light">Works</span>
             </h1>
-            <p class="font-body text-xl text-on-surface-variant leading-relaxed max-w-2xl">
+            <p class="font-body text-base text-on-surface-variant leading-relaxed max-w-2xl">
                 A curated selection of autonomous systems and intelligent architectures deployed for enterprise scale
                 and personal utility.
             </p>
         </div>
         <!-- Enterprise Cases Section -->
-        <section class="mb-32">
-            <div class="flex items-center gap-4 mb-10">
+        <section class="mb-12">
+            <div class="flex items-center gap-4 mb-5">
                 <h2 class="font-body text-sm font-bold tracking-[0.1em] uppercase text-primary">Enterprise Cases</h2>
                 <div class="flex-1 h-[1px] bg-outline-variant opacity-30"></div>
             </div>
-            <!-- Horizontal Scroll Container -->
-            <div class="flex overflow-x-auto gap-8 pb-12 snap-x snap-mandatory no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0">
+            <!-- 2-column grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <!-- Case Card 1: XPeng -->
                 <article
-                    class="snap-start flex-none w-[85vw] sm:w-[600px] md:w-[700px] bg-surface-container-high rounded-2xl p-8 md:p-12 shadow-[0_30px_60px_rgba(27,28,26,0.04)] relative group transition-transform duration-500 hover:-translate-y-1">
-                    <div
-                        class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    </div>
+                    class="bg-surface-container-high rounded-xl p-5 shadow-[0_20px_40px_rgba(27,28,26,0.04)] relative group transition-transform duration-500 hover:-translate-y-1">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     <div class="relative z-10 flex flex-col h-full">
-                        <div class="mb-8">
-                            <span
-                                class="inline-block px-3 py-1 bg-surface-container-lowest text-on-surface-variant text-xs font-bold tracking-widest uppercase rounded-full mb-6">XPeng
-                                Motors</span>
-                            <h3 class="font-headline text-3xl md:text-4xl text-on-surface leading-snug mb-4">
-                                Turning 10,000 voices into clarity.
-                            </h3>
-                            <p class="font-body text-on-surface-variant leading-relaxed text-base md:text-lg">
-                                XPeng's overseas team was drowning in customer feedback — 8 channels, 10,000+ entries
-                                per month, no unified view. I built the system that changed that.
-                            </p>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="px-2 py-0.5 bg-surface-container-lowest text-on-surface-variant text-xs font-bold tracking-widest uppercase rounded-full">XPeng Motors</span>
+                            <a class="inline-flex items-center gap-1 text-xs text-on-surface-variant font-medium hover:text-primary transition-colors group/link" href="#">
+                                Read case <span class="material-symbols-outlined text-xs transition-transform group-hover/link:translate-x-0.5">arrow_forward</span>
+                            </a>
                         </div>
-                        <div class="mt-auto pt-8 flex flex-wrap gap-8 md:gap-12">
+                        <h3 class="font-headline text-lg md:text-xl text-on-surface leading-snug mb-2">
+                            Turning 10,000 voices into clarity.
+                        </h3>
+                        <p class="font-body text-on-surface-variant leading-relaxed text-xs mb-4">
+                            XPeng's overseas team was drowning in customer feedback — 8 channels, 10,000+ entries per month, no unified view. I built the system that changed that.
+                        </p>
+                        <div class="mt-auto flex flex-wrap gap-5 border-t border-outline-variant/20 pt-3">
                             <div>
-                                <div class="font-headline text-2xl md:text-3xl text-primary mb-1">71%~95%</div>
-                                <div
-                                    class="font-body text-xs uppercase tracking-wider text-on-surface-variant font-semibold">
-                                    Classification accuracy</div>
-                                <div class="font-body text-xs text-outline mt-1">Up from 23%</div>
+                                <div class="font-headline text-base md:text-lg text-primary mb-0.5">71%~95%</div>
+                                <div class="font-body text-xs text-on-surface-variant">Classification accuracy</div>
+                                <div class="font-body text-xs text-outline/70">Up from 23%</div>
                             </div>
                             <div>
-                                <div class="font-headline text-2xl md:text-3xl text-primary mb-1">1 Day</div>
-                                <div
-                                    class="font-body text-xs uppercase tracking-wider text-on-surface-variant font-semibold">
-                                    Cycle time reduced</div>
-                                <div class="font-body text-xs text-outline mt-1">Down from 8 days</div>
+                                <div class="font-headline text-base md:text-lg text-primary mb-0.5">1 Day</div>
+                                <div class="font-body text-xs text-on-surface-variant">Cycle time reduced</div>
+                                <div class="font-body text-xs text-outline/70">Down from 8 days</div>
                             </div>
                             <div>
-                                <div class="font-headline text-2xl md:text-3xl text-primary mb-1">1 View</div>
-                                <div
-                                    class="font-body text-xs uppercase tracking-wider text-on-surface-variant font-semibold">
-                                    Channels unified</div>
-                                <div class="font-body text-xs text-outline mt-1">Combined from 8</div>
+                                <div class="font-headline text-base md:text-lg text-primary mb-0.5">1 View</div>
+                                <div class="font-body text-xs text-on-surface-variant">Channels unified</div>
+                                <div class="font-body text-xs text-outline/70">Combined from 8</div>
                             </div>
                         </div>
-                        <a class="mt-12 inline-flex items-center gap-2 text-on-surface font-semibold hover:text-primary transition-colors group/link w-fit"
-                            href="#">
-                            Read full case
-                            <span
-                                class="material-symbols-outlined text-sm transition-transform group-hover/link:translate-x-1">arrow_forward</span>
-                        </a>
                     </div>
                 </article>
                 <!-- Case Card 2: BMW -->
                 <article
-                    class="snap-start flex-none w-[85vw] sm:w-[600px] md:w-[700px] bg-surface-container-high rounded-2xl p-8 md:p-12 shadow-[0_30px_60px_rgba(27,28,26,0.04)] relative group transition-transform duration-500 hover:-translate-y-1">
-                    <div
-                        class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    </div>
+                    class="bg-surface-container-high rounded-xl p-5 shadow-[0_20px_40px_rgba(27,28,26,0.04)] relative group transition-transform duration-500 hover:-translate-y-1">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     <div class="relative z-10 flex flex-col h-full">
-                        <div class="mb-8">
-                            <span
-                                class="inline-block px-3 py-1 bg-surface-container-lowest text-on-surface-variant text-xs font-bold tracking-widest uppercase rounded-full mb-6">BMW</span>
-                            <h3 class="font-headline text-3xl md:text-4xl text-on-surface leading-snug mb-4">
-                                Precision Retrieval for the Ultimate Driving Machine.
-                            </h3>
-                            <p class="font-body text-on-surface-variant leading-relaxed text-base md:text-lg">
-                                Building a high-performance RAG-based AI Agent for knowledge base to ensure technical
-                                data is accessible...
-                            </p>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="px-2 py-0.5 bg-surface-container-lowest text-on-surface-variant text-xs font-bold tracking-widest uppercase rounded-full">BMW</span>
+                            <a class="inline-flex items-center gap-1 text-xs text-on-surface-variant font-medium hover:text-primary transition-colors group/link" href="#">
+                                Read case <span class="material-symbols-outlined text-xs transition-transform group-hover/link:translate-x-0.5">arrow_forward</span>
+                            </a>
                         </div>
-                        <div class="mt-auto pt-8 flex flex-wrap gap-8 md:gap-12">
+                        <h3 class="font-headline text-lg md:text-xl text-on-surface leading-snug mb-2">
+                            Precision Retrieval for the Ultimate Driving Machine.
+                        </h3>
+                        <p class="font-body text-on-surface-variant leading-relaxed text-xs mb-4">
+                            Building a high-performance RAG-based AI Agent for knowledge base to ensure technical data is accessible...
+                        </p>
+                        <div class="mt-auto flex flex-wrap gap-5 border-t border-outline-variant/20 pt-3">
                             <div>
-                                <div class="font-headline text-2xl md:text-3xl text-primary mb-1">&lt; 1.2s</div>
-                                <div
-                                    class="font-body text-xs uppercase tracking-wider text-on-surface-variant font-semibold">
-                                    Low Latency</div>
+                                <div class="font-headline text-base md:text-lg text-primary mb-0.5">&lt; 1.2s</div>
+                                <div class="font-body text-xs text-on-surface-variant">Low Latency</div>
                             </div>
                             <div>
-                                <div class="font-headline text-2xl md:text-3xl text-primary mb-1">98.5%</div>
-                                <div
-                                    class="font-body text-xs uppercase tracking-wider text-on-surface-variant font-semibold">
-                                    High Accuracy</div>
+                                <div class="font-headline text-base md:text-lg text-primary mb-0.5">98.5%</div>
+                                <div class="font-body text-xs text-on-surface-variant">High Accuracy</div>
                             </div>
                             <div>
-                                <div class="font-headline text-2xl md:text-3xl text-primary mb-1">500+</div>
-                                <div
-                                    class="font-body text-xs uppercase tracking-wider text-on-surface-variant font-semibold">
-                                    Daily Active Users</div>
+                                <div class="font-headline text-base md:text-lg text-primary mb-0.5">500+</div>
+                                <div class="font-body text-xs text-on-surface-variant">Daily Active Users</div>
                             </div>
                         </div>
-                        <a class="mt-12 inline-flex items-center gap-2 text-on-surface font-semibold hover:text-primary transition-colors group/link w-fit"
-                            href="#">
-                            Read full case
-                            <span
-                                class="material-symbols-outlined text-sm transition-transform group-hover/link:translate-x-1">arrow_forward</span>
-                        </a>
                     </div>
                 </article>
             </div>
         </section>
         <!-- Personal Cases Section -->
         <section>
-            <div class="flex items-center gap-4 mb-10">
+            <div class="flex items-center gap-4 mb-5">
                 <h2 class="font-body text-sm font-bold tracking-[0.1em] uppercase text-primary">Personal Cases</h2>
                 <div class="flex-1 h-[1px] bg-outline-variant opacity-30"></div>
             </div>
-            <!-- Horizontal Scroll Container -->
-            <div class="flex overflow-x-auto gap-8 pb-12 snap-x snap-mandatory no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0">
+            <!-- 3-column grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
                 <!-- Case Card 1 -->
-                <article
-                    class="snap-start flex-none w-[80vw] sm:w-[450px] bg-surface-container-low rounded-2xl p-8 relative group">
-                    <div
-                        class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center mb-8">
-                        <span class="material-symbols-outlined text-primary text-xl">work</span>
+                <article class="bg-surface-container-low rounded-xl p-6 relative group transition-transform duration-500 hover:-translate-y-1">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="relative z-10">
+                        <div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center mb-4">
+                            <span class="material-symbols-outlined text-primary text-lg">work</span>
+                        </div>
+                        <h3 class="font-headline text-xl text-on-surface mb-3">Job Search AI Native App</h3>
+                        <p class="font-body text-on-surface-variant leading-relaxed text-sm">
+                            Automating the search and application process with intelligent matching, reasoning over
+                            candidate experience versus role requirements.
+                        </p>
                     </div>
-                    <h3 class="font-headline text-2xl text-on-surface mb-4">Job Search AI Native App</h3>
-                    <p class="font-body text-on-surface-variant leading-relaxed text-sm">
-                        Automating the search and application process with intelligent matching, reasoning over
-                        candidate experience versus role requirements.
-                    </p>
                 </article>
                 <!-- Case Card 2 -->
-                <article
-                    class="snap-start flex-none w-[80vw] sm:w-[450px] bg-surface-container-low rounded-2xl p-8 relative group">
-                    <div
-                        class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center mb-8">
-                        <span class="material-symbols-outlined text-primary text-xl">record_voice_over</span>
+                <article class="bg-surface-container-low rounded-xl p-6 relative group transition-transform duration-500 hover:-translate-y-1">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="relative z-10">
+                        <div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center mb-4">
+                            <span class="material-symbols-outlined text-primary text-lg">record_voice_over</span>
+                        </div>
+                        <h3 class="font-headline text-xl text-on-surface mb-3">Digital Twin Social Media Ops</h3>
+                        <p class="font-body text-on-surface-variant leading-relaxed text-sm">
+                            A system that mirrors creator voice for authentic automated engagement, managing asynchronous
+                            communication streams.
+                        </p>
                     </div>
-                    <h3 class="font-headline text-2xl text-on-surface mb-4">Digital Twin Social Media Ops</h3>
-                    <p class="font-body text-on-surface-variant leading-relaxed text-sm">
-                        A system that mirrors creator voice for authentic automated engagement, managing asynchronous
-                        communication streams.
-                    </p>
                 </article>
                 <!-- Case Card 3 -->
-                <article
-                    class="snap-start flex-none w-[80vw] sm:w-[450px] bg-surface-container-low rounded-2xl p-8 relative group">
-                    <div
-                        class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center mb-8">
-                        <span class="material-symbols-outlined text-primary text-xl">hub</span>
+                <article class="bg-surface-container-low rounded-xl p-6 relative group transition-transform duration-500 hover:-translate-y-1">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="relative z-10">
+                        <div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center mb-4">
+                            <span class="material-symbols-outlined text-primary text-lg">hub</span>
+                        </div>
+                        <h3 class="font-headline text-xl text-on-surface mb-3">5-Agent Dev Team</h3>
+                        <p class="font-body text-on-surface-variant leading-relaxed text-sm">
+                            An autonomous ensemble of agents collaborating on complex software tasks, utilizing specialized
+                            sub-routines for planning, coding, and review.
+                        </p>
                     </div>
-                    <h3 class="font-headline text-2xl text-on-surface mb-4">5-Agent Dev Team</h3>
-                    <p class="font-body text-on-surface-variant leading-relaxed text-sm">
-                        An autonomous ensemble of agents collaborating on complex software tasks, utilizing specialized
-                        sub-routines for planning, coding, and review.
-                    </p>
                 </article>
             </div>
         </section>
@@ -517,7 +493,7 @@
     <!-- ============================================================
      SECTION 3 — SERVICES (unchanged main from 3.services)
      ============================================================ -->
-    <main class="flex-grow pt-24 pb-32">
+    <main class="flex-grow pt-16 pb-16">
         <div class="max-w-7xl mx-auto px-6 lg:px-12 relative flex flex-col md:flex-row gap-16 lg:gap-24">
             <!-- Left Column: Sticky Narrative -->
             <div class="w-full md:w-6/12 relative">
@@ -525,7 +501,7 @@
                     <!-- Narrative Header -->
                     <div class="border-l-2 border-[#B35A44] pl-8 py-2">
                         <h1
-                            class="font-headline text-4xl md:text-6xl text-on-surface tracking-tight mb-6 leading-[0.95]">
+                            class="font-headline text-4xl md:text-6xl text-on-surface tracking-tight mb-4 leading-[0.95]">
                             The Architecture <br />
                             <span class="italic text-on-surface-variant font-light">of Intelligence</span>
                         </h1>
@@ -619,7 +595,7 @@
      SECTION 4 — PHILOSOPHY (unchanged main from 4.philosophy)
      ============================================================ -->
     <main
-        class="flex-grow flex items-center justify-center relative w-full px-8 md:px-24 py-32 bg-surface-container-low min-h-[819px]">
+        class="flex-grow flex items-center justify-center relative w-full px-8 md:px-24 py-16 bg-surface-container-low">
         <!-- Subtle gradient orb for ambient warmth -->
         <div
             class="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-primary-container/5 rounded-full blur-[100px] pointer-events-none">
@@ -661,11 +637,11 @@
      SECTION 5 — CONTACT (unchanged main from 5.contact)
      ============================================================ -->
     <main
-        class="flex-grow pt-32 pb-24 px-8 md:px-16 max-w-screen-2xl mx-auto w-full flex flex-col md:flex-row gap-16 md:gap-32 items-start mt-12">
+        class="flex-grow pt-16 pb-16 px-8 md:px-16 max-w-screen-2xl mx-auto w-full flex flex-col md:flex-row gap-16 md:gap-24 items-start mt-0">
         <!-- Left Side: Personal Details (Human at the Core) -->
         <section class="w-full md:w-1/2 flex flex-col gap-12">
             <div>
-                <h1 class="font-headline text-5xl md:text-7xl font-light tracking-tight text-on-surface mb-6" style="">
+                <h1 class="font-headline text-4xl md:text-6xl font-light tracking-tight text-on-surface mb-6" style="">
                     Wuyaqi Yin
                 </h1>
                 <p class="font-headline text-2xl md:text-3xl italic text-on-surface-variant font-light max-w-lg"
