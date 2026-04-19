@@ -178,7 +178,7 @@
     <style>
         .typewriter-cursor {
             display: inline-block;
-            width: 2px;
+            width: 1px;
             height: 1.1em;
             background-color: #94422e;
             margin-left: 2px;
@@ -201,7 +201,7 @@
         .typewriter-text {
             color: #94422e;
             font-style: italic;
-            border-bottom: 2px solid rgba(148, 66, 46, 0.3);
+            border-bottom: 1px solid rgba(148, 66, 46, 0.3);
             min-width: 0;
             display: inline-block;
         }
@@ -241,7 +241,7 @@
 </head>
 
 <body
-    class="bg-surface text-on-surface font-body antialiased min-h-screen flex flex-col selection:bg-primary-container selection:text-on-primary-container relative bg-noise">
+    class="bg-surface text-on-surface font-body antialiased min-h-screen flex flex-col selection:bg-primary-container selection:text-on-primary-container relative bg-noise overflow-x-hidden">
     <!-- ============================================================
      NAVIGATION — from 4.philosophy (unchanged)
      ============================================================ -->
@@ -318,36 +318,25 @@
                 <div
                     class="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-6 pt-4">
                     <button
-                        class="px-6 py-3 rounded-md border border-primary bg-transparent text-primary font-label text-sm tracking-widest uppercase hover:shadow-[0_20px_40px_rgba(148,66,46,0.2)] transition-all duration-300 flex items-center space-x-2"
+                        class="px-6 py-3 rounded-md border border-primary bg-transparent text-primary font-label font-semibold text-sm tracking-widest uppercase hover:shadow-[0_20px_40px_rgba(148,66,46,0.2)] transition-all duration-300 flex items-center space-x-2"
                         style="">
                         <span class="" style="">View Portfolio</span>
                         <span class="material-symbols-outlined text-sm" style="">arrow_forward</span>
                     </button>
                 </div>
             </div>
-            <!-- Right Side: Antigravity 3D Frame Visual -->
+            <!-- Right Side: Clean portrait with green ambient glow -->
             <div
                 class="col-span-1 lg:col-span-4 hidden lg:flex justify-center items-center relative h-full min-h-[500px]">
-                <!-- Portrait Container -->
-                <div class="relative portrait-container group">
-                    <!-- The Portrait -->
-                    <div
-                        class="w-72 h-72 md:w-80 md:h-80 organic-circle-mask overflow-hidden border border-outline-variant/20 p-2 bg-white/30 backdrop-blur-sm">
+                <div class="relative">
+                    <!-- Green ambient glow behind portrait -->
+                    <div class="absolute -inset-8 bg-tertiary-fixed/50 blur-3xl -z-10 rounded-full"></div>
+                    <!-- Clean circular portrait -->
+                    <div class="w-56 h-56 md:w-64 md:h-64 rounded-full overflow-hidden">
                         <img alt="Wuyaqi Portrait"
-                            class="w-full h-full object-cover rounded-full grayscale-[0.2] contrast-[1.05]"
+                            class="w-full h-full object-cover grayscale-[0.2] contrast-[1.05]"
                             src="https://lh3.googleusercontent.com/aida/ADBb0ugxdrO7Ed71GkdsiPQNFCplCqIcOyBwNXWK5J9E4AvNeZbcVgwxHNokbv-gBrkHxHU49YNQAfAXTiFo6onS4fcoMpbiujQZlFQnJ41SqGmbuYccUJqOL4dc126HyE5tRcyLavf1SijKeEw3z2hQGI_fgmoUex-nN4KaX4xoD6Omf-eFZ4pInd2R2qlQew65Ecm0pw4YWBOUQoAKttPEMy17iMqJUR-0JSvNNLOFqxwnvyuD-wI0lTjO3CgvVLSZpQ73-ezHB5uKIg" />
                     </div>
-                    <!-- Orbiting Elements - Repositioned for the portrait -->
-                    <div
-                        class="absolute w-12 h-12 rounded-full glass-panel -top-4 -right-4 flex items-center justify-center text-primary shadow-lg border border-white/40 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-700">
-                        <span class="material-symbols-outlined text-sm">architecture</span>
-                    </div>
-                    <div
-                        class="absolute w-10 h-10 rounded-full glass-panel -bottom-2 -left-4 flex items-center justify-center text-primary/70 shadow-lg border border-white/30 group-hover:-translate-x-1 group-hover:translate-y-1 transition-transform duration-700">
-                        <span class="material-symbols-outlined text-sm">psychology</span>
-                    </div>
-                    <!-- Subtle Ambient Glow behind portrait -->
-                    <div class="absolute -inset-4 bg-primary/5 blur-3xl -z-10 rounded-full"></div>
                 </div>
             </div>
         </div>
@@ -359,9 +348,9 @@
     <main class="pt-32 pb-24 max-w-7xl mx-auto px-4 sm:px-8">
         <!-- Section Header -->
         <div class="mb-20 max-w-3xl border-l-2 border-primary-container pl-8 py-2">
-            <h1 class="font-headline text-5xl md:text-7xl text-on-surface tracking-tight mb-6 leading-tight">The
+            <h1 class="font-headline text-4xl md:text-6xl text-on-surface tracking-tight mb-6 leading-[0.95]">The
                 deployed <br />
-                <font color="#55433e"><i>Works</i></font>
+                <span class="italic text-on-surface-variant font-light">Works</span>
             </h1>
             <p class="font-body text-xl text-on-surface-variant leading-relaxed max-w-2xl">
                 A curated selection of autonomous systems and intelligent architectures deployed for enterprise scale
@@ -536,7 +525,7 @@
                     <!-- Narrative Header -->
                     <div class="border-l-2 border-[#B35A44] pl-8 py-2">
                         <h1
-                            class="font-headline text-5xl lg:text-7xl text-on-surface tracking-tight mb-6 leading-tight">
+                            class="font-headline text-4xl md:text-6xl text-on-surface tracking-tight mb-6 leading-[0.95]">
                             The Architecture <br />
                             <span class="italic text-on-surface-variant font-light">of Intelligence</span>
                         </h1>
