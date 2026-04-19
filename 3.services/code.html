@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Services - Wuyaqi, AI Agent Architect</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Manrope:wght@200..800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#525e4b",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-container": "#fffaf9",
+                        "on-tertiary-fixed-variant": "#3e4a38",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed": "#e4e2e1",
+                        "inverse-on-surface": "#f2f0ed",
+                        "error-container": "#ffdad6",
+                        "secondary": "#5f5e5e",
+                        "primary": "#94422e",
+                        "tertiary-container": "#6a7763",
+                        "primary-container": "#b35a44",
+                        "on-secondary-container": "#656464",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed": "#1b1c1c",
+                        "on-background": "#1b1c1a",
+                        "surface": "#fbf9f5",
+                        "on-surface": "#1b1c1a",
+                        "on-primary-fixed-variant": "#7a2f1c",
+                        "surface-dim": "#dbdad6",
+                        "secondary-container": "#e4e2e1",
+                        "surface-bright": "#fbf9f5",
+                        "on-tertiary": "#ffffff",
+                        "surface-variant": "#e4e2de",
+                        "inverse-surface": "#30312e",
+                        "tertiary-fixed": "#d9e7ce",
+                        "on-primary-fixed": "#3c0700",
+                        "primary-fixed": "#ffdad2",
+                        "on-tertiary-container": "#f1ffe6",
+                        "background": "#fbf9f5",
+                        "on-error": "#ffffff",
+                        "surface-container-low": "#f5f3ef",
+                        "surface-container-high": "#eae8e4",
+                        "outline-variant": "#dbc1bb",
+                        "surface-container-highest": "#e4e2de",
+                        "primary-fixed-dim": "#ffb4a2",
+                        "outline": "#88726d",
+                        "tertiary-fixed-dim": "#bdcbb3",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#141e0f",
+                        "on-surface-variant": "#55433e",
+                        "on-secondary-fixed-variant": "#474747",
+                        "surface-tint": "#984631",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "inverse-primary": "#ffb4a2",
+                        "surface-container": "#efeeea"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Newsreader", "serif"],
+                        "body": ["Manrope", "sans-serif"],
+                        "label": ["Manrope", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Hide scrollbar for a cleaner atelier look while retaining functionality */
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+
+        .ambient-shadow {
+            box-shadow: 0 20px 40px -10px rgba(27, 28, 26, 0.06);
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-background font-body antialiased min-h-screen flex flex-col">
+    <!-- TopAppBar -->
+    <nav
+        class="fixed top-0 w-full z-50 bg-stone-50/80 dark:bg-stone-950/80 backdrop-blur-xl bg-gradient-to-b from-stone-100/50 to-transparent shadow-sm shadow-stone-200/50 dark:shadow-none">
+        <div class="flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto">
+            <div class="text-2xl font-newsreader italic text-stone-900 dark:text-stone-50 font-headline tracking-tight">
+                Architect.ai
+            </div>
+            <div class="hidden md:flex gap-8 items-center">
+                <a class="text-orange-800 dark:text-orange-400 border-b border-orange-800/30 pb-1 hover:text-orange-700 dark:hover:text-orange-300 transition-colors duration-300 font-manrope text-sm tracking-widest font-label"
+                    href="#">Services</a>
+                <a class="text-stone-600 dark:text-stone-400 font-manrope text-sm tracking-widest hover:text-orange-700 dark:hover:text-orange-300 transition-colors duration-300 font-label"
+                    href="#">Portfolio</a>
+                <a class="text-stone-600 dark:text-stone-400 font-manrope text-sm tracking-widest hover:text-orange-700 dark:hover:text-orange-300 transition-colors duration-300 font-label"
+                    href="#">Process</a>
+                <a class="text-stone-600 dark:text-stone-400 font-manrope text-sm tracking-widest hover:text-orange-700 dark:hover:text-orange-300 transition-colors duration-300 font-label"
+                    href="#">Contact</a>
+            </div>
+            <button
+                class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-6 py-2 rounded-md font-label text-sm tracking-wider hover:opacity-90 transition-opacity">
+                Start Project
+            </button>
+        </div>
+    </nav>
+    <!-- Main Content: Scrollytelling Layout -->
+    <main class="flex-grow pt-24 pb-32">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 relative flex flex-col md:flex-row gap-16 lg:gap-24">
+            <!-- Left Column: Sticky Narrative -->
+            <div class="w-full md:w-6/12 relative">
+                <div class="md:sticky md:top-40 flex flex-col gap-12 pb-24">
+                    <!-- Narrative Header -->
+                    <div class="border-l-2 border-[#B35A44] pl-8 py-2">
+                        <h1
+                            class="font-headline text-5xl lg:text-7xl text-on-surface tracking-tight mb-6 leading-tight">
+                            The Architecture <br />
+                            <span class="italic text-on-surface-variant font-light">of Intelligence</span>
+                        </h1>
+                        <p class="font-body text-on-surface-variant text-xl leading-relaxed max-w-md">
+                            A structured approach to transforming raw potential into deployed, multi-agent systems.
+                        </p>
+                    </div>
+                    <!-- Scrollytelling Text Nodes -->
+                    <div class="flex flex-col gap-48 mt-24 md:mt-32">
+                        <!-- Phase 1 Text -->
+                        <div class="flex flex-col gap-8" id="phase-1-text">
+                            <div class="flex items-center gap-6">
+                                <div
+                                    class="w-12 h-12 rounded-full border-2 border-[#B35A44] flex items-center justify-center">
+                                    <span class="font-headline text-xl text-[#B35A44] font-bold">01</span>
+                                </div>
+                                <h2 class="font-headline text-5xl md:text-6xl text-[#B35A44] tracking-tight">See Clearly
+                                </h2>
+                            </div>
+                            <h3 class="font-body text-xl md:text-2xl text-on-surface font-medium max-w-lg leading-snug">
+                                1:1 advisory on AI readiness &amp; transformation roadmap
+                            </h3>
+                            <div class="border-l-4 border-[#B35A44]/30 pl-8 py-4">
+                                <p
+                                    class="font-headline text-2xl md:text-3xl italic text-on-surface-variant leading-relaxed">
+                                    "What's worth building — and what's not."
+                                </p>
+                            </div>
+                        </div>
+                        <!-- Phase 2 Text -->
+                        <div class="flex flex-col gap-8 opacity-40 hover:opacity-100 transition-opacity duration-500"
+                            id="phase-2-text">
+                            <div class="flex items-center gap-6">
+                                <div
+                                    class="w-12 h-12 rounded-full border-2 border-[#B35A44] flex items-center justify-center">
+                                    <span class="font-headline text-xl text-[#B35A44] font-bold">02</span>
+                                </div>
+                                <h2 class="font-headline text-5xl md:text-6xl text-[#B35A44] tracking-tight">Think
+                                    Together</h2>
+                            </div>
+                            <h3 class="font-body text-xl md:text-2xl text-on-surface font-medium max-w-lg leading-snug">
+                                Team workshops for AI alignment &amp; use-case discovery
+                            </h3>
+                            <div class="border-l-4 border-[#B35A44]/30 pl-8 py-4">
+                                <p
+                                    class="font-headline text-2xl md:text-3xl italic text-on-surface-variant leading-relaxed">
+                                    "Get your people on board before the system goes live."
+                                </p>
+                            </div>
+                        </div>
+                        <!-- Phase 3 Text -->
+                        <div class="flex flex-col gap-8 opacity-40 hover:opacity-100 transition-opacity duration-500"
+                            id="phase-3-text">
+                            <div class="flex items-center gap-6">
+                                <div
+                                    class="w-12 h-12 rounded-full border-2 border-[#B35A44] flex items-center justify-center">
+                                    <span class="font-headline text-xl text-[#B35A44] font-bold">03</span>
+                                </div>
+                                <h2 class="font-headline text-5xl md:text-6xl text-[#B35A44] tracking-tight">Build It
+                                </h2>
+                            </div>
+                            <h3 class="font-body text-xl md:text-2xl text-on-surface font-medium max-w-lg leading-snug">
+                                Multi-agent system design &amp; production deployment
+                            </h3>
+                            <div class="border-l-4 border-[#B35A44]/30 pl-8 py-4">
+                                <p
+                                    class="font-headline text-2xl md:text-3xl italic text-on-surface-variant leading-relaxed">
+                                    "A working system, not a slide deck."
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Right Column: Scrolling Visuals (Emptied for 3D Backgrounds) -->
+            <div class="w-full md:w-6/12 flex flex-col gap-48 py-12 md:py-48">
+                <!-- Phase 1 Visual Area -->
+                <div class="w-full h-[60vh]" id="phase-1-visual">
+                </div>
+                <!-- Phase 2 Visual Area -->
+                <div class="w-full h-[60vh]" id="phase-2-visual">
+                </div>
+                <!-- Phase 3 Visual Area -->
+                <div class="w-full h-[60vh]" id="phase-3-visual">
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer
+        class="w-full py-16 mt-20 bg-stone-100 dark:bg-stone-900 border-t-0 bg-surface-container-low transition-colors duration-300">
+        <div class="flex flex-col md:flex-row justify-between items-center px-8 max-w-7xl mx-auto gap-8">
+            <div class="font-newsreader text-stone-900 dark:text-stone-100 font-headline text-lg italic">
+                Architect.ai
+            </div>
+            <div class="flex gap-6 items-center">
+                <a class="text-stone-500 dark:text-stone-500 hover:text-stone-900 dark:hover:text-stone-100 underline underline-offset-4 font-manrope text-xs tracking-wider uppercase font-label transition-colors"
+                    href="#">Design Philosophy</a>
+                <a class="text-stone-500 dark:text-stone-500 hover:text-stone-900 dark:hover:text-stone-100 underline underline-offset-4 font-manrope text-xs tracking-wider uppercase font-label transition-colors"
+                    href="#">Privacy</a>
+                <a class="text-stone-500 dark:text-stone-500 hover:text-stone-900 dark:hover:text-stone-100 underline underline-offset-4 font-manrope text-xs tracking-wider uppercase font-label transition-colors"
+                    href="#">Terms</a>
+                <a class="text-stone-500 dark:text-stone-500 hover:text-stone-900 dark:hover:text-stone-100 underline underline-offset-4 font-manrope text-xs tracking-wider uppercase font-label transition-colors"
+                    href="#">LinkedIn</a>
+            </div>
+            <div
+                class="text-orange-900 dark:text-orange-200 font-manrope text-xs tracking-wider uppercase font-label opacity-70">
+                © 2024 AI Agent Architect. Crafted with Architectural Precision.
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

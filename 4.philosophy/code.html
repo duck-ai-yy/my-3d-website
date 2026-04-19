@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Wuyaqi - AI Agent Architect</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container": "#efeeea",
+                        "secondary": "#5f5e5e",
+                        "on-surface": "#1b1c1a",
+                        "surface-variant": "#e4e2de",
+                        "surface-dim": "#dbdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#eae8e4",
+                        "on-tertiary-fixed": "#141e0f",
+                        "tertiary-container": "#6a7763",
+                        "surface-bright": "#fbf9f5",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "outline": "#88726d",
+                        "surface": "#fbf9f5",
+                        "outline-variant": "#dbc1bb",
+                        "surface-tint": "#984631",
+                        "on-tertiary-fixed-variant": "#3e4a38",
+                        "on-primary": "#ffffff",
+                        "inverse-surface": "#30312e",
+                        "on-secondary-fixed-variant": "#474747",
+                        "on-secondary-container": "#656464",
+                        "on-primary-fixed": "#3c0700",
+                        "on-secondary-fixed": "#1b1c1c",
+                        "primary": "#94422e",
+                        "tertiary-fixed-dim": "#bdcbb3",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#e4e2de",
+                        "on-surface-variant": "#55433e",
+                        "primary-fixed": "#ffdad2",
+                        "on-tertiary-container": "#f1ffe6",
+                        "on-primary-fixed-variant": "#7a2f1c",
+                        "on-background": "#1b1c1a",
+                        "error-container": "#ffdad6",
+                        "on-secondary": "#ffffff",
+                        "inverse-on-surface": "#f2f0ed",
+                        "tertiary": "#525e4b",
+                        "background": "#fbf9f5",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#fffaf9",
+                        "on-error": "#ffffff",
+                        "primary-container": "#b35a44",
+                        "primary-fixed-dim": "#ffb4a2",
+                        "inverse-primary": "#ffb4a2",
+                        "secondary-container": "#e4e2e1",
+                        "error": "#ba1a1a",
+                        "surface-container-low": "#f5f3ef",
+                        "secondary-fixed": "#e4e2e1",
+                        "tertiary-fixed": "#d9e7ce"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        "headline": ["Newsreader", "serif"],
+                        "body": ["Manrope", "sans-serif"],
+                        "label": ["Manrope", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Subtle noise texture for the atelier feel */
+        .bg-noise {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body antialiased min-h-screen flex flex-col selection:bg-primary-container selection:text-on-primary-container relative bg-noise">
+<!-- TopAppBar from JSON -->
+<header class="sticky top-0 w-full z-50 bg-[#fbf9f5]/80 dark:bg-[#1b1c1a]/80 backdrop-blur-xl after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-full after:bg-[#1b1c1a]/5 flat-no-shadows">
+<div class="flex justify-between items-center px-12 py-8 max-w-[1920px] mx-auto">
+<div class="text-[#94422e] dark:text-[#b35a44]">
+<span class="text-2xl font-serif italic tracking-tighter text-[#1b1c1a] dark:text-[#fbf9f5]" style="">Wuyaqi</span>
+</div>
+<nav class="hidden md:flex items-center gap-10">
+<a class="text-[#94422e] dark:text-[#b35a44] font-serif italic hover:text-[#94422e] dark:hover:text-[#b35a44] transition-all duration-500 ease-in-out" href="#" style="">Philosophy</a>
+<a class="text-[#55433e] dark:text-[#e4e2de] font-sans text-xs uppercase tracking-[0.2em] font-medium hover:text-[#94422e] dark:hover:text-[#b35a44] transition-all duration-500 ease-in-out" href="#" style="">Experience</a>
+<a class="text-[#55433e] dark:text-[#e4e2de] font-sans text-xs uppercase tracking-[0.2em] font-medium hover:text-[#94422e] dark:hover:text-[#b35a44] transition-all duration-500 ease-in-out" href="#" style="">Cases</a>
+<a class="text-[#55433e] dark:text-[#e4e2de] font-sans text-xs uppercase tracking-[0.2em] font-medium hover:text-[#94422e] dark:hover:text-[#b35a44] transition-all duration-500 ease-in-out" href="#" style="">Connect</a>
+</nav>
+<div class="hidden md:block">
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-md px-6 py-3 font-label text-sm font-semibold hover:opacity-90 transition-opacity active:scale-[0.98]" style="">
+                    Collaborate
+                </button>
+</div>
+<!-- Mobile Menu Toggle (Decorative) -->
+<button class="md:hidden text-on-surface" style="">
+<span class="material-symbols-outlined text-2xl" style="">menu</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas: Typographic Expression -->
+<main class="flex-grow flex items-center justify-center relative w-full px-8 md:px-24 py-32 bg-surface-container-low min-h-[819px]">
+<!-- Subtle gradient orb for ambient warmth -->
+<div class="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-primary-container/5 rounded-full blur-[100px] pointer-events-none"></div>
+<div class="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-tertiary-container/5 rounded-full blur-[120px] pointer-events-none"></div>
+<div class="max-w-5xl mx-auto relative z-10">
+<!-- Decorative quote mark -->
+<div aria-hidden="true" class="absolute -top-16 -left-12 text-primary/10 font-headline text-9xl leading-none select-none" style="">"</div>
+<blockquote class="text-on-surface tracking-tight"><div class="flex flex-col gap-12">
+<h2 class="font-headline text-4xl md:text-5xl lg:text-7xl tracking-tight leading-tight md:leading-tight italic font-light bg-gradient-to-r from-on-surface via-primary to-on-surface bg-clip-text text-transparent">
+        Technology should disappear into the way people already work.
+    </h2>
+<p class="font-headline text-xl md:text-2xl text-on-surface-variant leading-relaxed max-w-3xl font-normal">
+        I redesign workflows with AI that eliminates friction — so your team spends less time on what drains them and more time on what only humans can do: <em class="text-primary italic">create, connect and decide.</em>
+</p>
+</div></blockquote>
+<!-- Architectural Signature -->
+<div class="mt-20 flex items-center gap-6">
+<div class="w-12 h-[1px] bg-outline-variant/40"></div>
+<div class="flex flex-col">
+<span class="font-label text-xs uppercase tracking-[0.2em] text-on-surface-variant font-medium" style="">Core Philosophy</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer from JSON -->
+<footer class="w-full py-20 px-12 bg-[#f5f3ef] dark:bg-[#1b1c1a] flat-elevation-0 tonal-shift-no-borders">
+<div class="flex flex-col md:flex-row justify-between items-end gap-12 max-w-[1920px] mx-auto">
+<div class="flex flex-col gap-6">
+<span class="font-serif italic text-lg text-[#1b1c1a] dark:text-[#fbf9f5]" style="">Wuyaqi</span>
+<p class="font-sans text-[#55433e] dark:text-[#e4e2de] text-sm" style="">
+                    © 2024 Wuyaqi — AI Agent Architect. Built with Structural Warmth.
+                </p>
+</div>
+<nav class="flex flex-wrap gap-8">
+<a class="text-[#94422e] underline underline-offset-8 font-sans hover:text-[#1b1c1a] dark:hover:text-[#fbf9f5] transition-colors duration-300" href="#" style="">Philosophy</a>
+<a class="text-[#55433e] dark:text-[#e4e2de] text-sm uppercase tracking-widest font-sans hover:text-[#1b1c1a] dark:hover:text-[#fbf9f5] transition-colors duration-300" href="#" style="">Experience</a>
+<a class="text-[#55433e] dark:text-[#e4e2de] text-sm uppercase tracking-widest font-sans hover:text-[#1b1c1a] dark:hover:text-[#fbf9f5] transition-colors duration-300" href="#" style="">Cases</a>
+<a class="text-[#55433e] dark:text-[#e4e2de] text-sm uppercase tracking-widest font-sans hover:text-[#1b1c1a] dark:hover:text-[#fbf9f5] transition-colors duration-300" href="#" style="">Connect</a>
+<a class="text-[#55433e] dark:text-[#e4e2de] text-sm uppercase tracking-widest font-sans hover:text-[#1b1c1a] dark:hover:text-[#fbf9f5] transition-colors duration-300" href="#" style="">Privacy</a>
+</nav>
+</div>
+</footer>
+</body></html>

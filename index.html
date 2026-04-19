@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Wuyaqi - AI Agent Architect</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container": "#efeeea",
+                        "secondary": "#5f5e5e",
+                        "on-surface": "#1b1c1a",
+                        "surface-variant": "#e4e2de",
+                        "surface-dim": "#dbdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#eae8e4",
+                        "on-tertiary-fixed": "#141e0f",
+                        "tertiary-container": "#6a7763",
+                        "surface-bright": "#fbf9f5",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "outline": "#88726d",
+                        "surface": "#fbf9f5",
+                        "outline-variant": "#dbc1bb",
+                        "surface-tint": "#984631",
+                        "on-tertiary-fixed-variant": "#3e4a38",
+                        "on-primary": "#ffffff",
+                        "inverse-surface": "#30312e",
+                        "on-secondary-fixed-variant": "#474747",
+                        "on-secondary-container": "#656464",
+                        "on-primary-fixed": "#3c0700",
+                        "on-secondary-fixed": "#1b1c1c",
+                        "primary": "#94422e",
+                        "tertiary-fixed-dim": "#bdcbb3",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#e4e2de",
+                        "on-surface-variant": "#55433e",
+                        "primary-fixed": "#ffdad2",
+                        "on-tertiary-container": "#f1ffe6",
+                        "on-primary-fixed-variant": "#7a2f1c",
+                        "on-background": "#1b1c1a",
+                        "error-container": "#ffdad6",
+                        "on-secondary": "#ffffff",
+                        "inverse-on-surface": "#f2f0ed",
+                        "tertiary": "#525e4b",
+                        "background": "#fbf9f5",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#fffaf9",
+                        "on-error": "#ffffff",
+                        "primary-container": "#b35a44",
+                        "primary-fixed-dim": "#ffb4a2",
+                        "inverse-primary": "#ffb4a2",
+                        "secondary-container": "#e4e2e1",
+                        "error": "#ba1a1a",
+                        "surface-container-low": "#f5f3ef",
+                        "secondary-fixed": "#e4e2e1",
+                        "tertiary-fixed": "#d9e7ce"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        "headline": ["Newsreader", "serif"],
+                        "body": ["Manrope", "sans-serif"],
+                        "label": ["Manrope", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        /* Subtle noise texture for the atelier feel (from philosophy section) */
+        .bg-noise {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+        }
+    </style>
+    <style>
+        /* Hero section styles */
+        .ambient-glow {
+            position: absolute;
+            width: 80vw;
+            height: 80vw;
+            max-width: 800px;
+            max-height: 800px;
+            border-radius: 50%;
+            background: radial-gradient(circle, theme('colors.primary-fixed-dim') 0%, transparent 70%);
+            opacity: 0.15;
+            z-index: -1;
+            filter: blur(60px);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .glass-panel {
+            background: rgba(251, 249, 245, 0.4);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(219, 193, 187, 0.15);
+        }
+
+        .word-carousel {
+            display: inline-flex;
+            overflow: hidden;
+            vertical-align: bottom;
+            height: 1.2em;
+            line-height: 1.2em;
+            position: relative;
+            border-bottom: 2px solid rgba(148, 66, 46, 0.3);
+        }
+
+        .word-carousel-inner {
+            animation: slide-down 12s cubic-bezier(0.76, 0, 0.24, 1) infinite;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            transform: translateY(-1.2em);
+        }
+
+        .word-carousel-item {
+            height: 1.2em;
+            line-height: 1.2em;
+            color: theme('colors.primary');
+            font-style: italic;
+            display: flex;
+            align-items: center;
+        }
+
+        @keyframes slide-down {
+            0% {
+                transform: translateY(-1.2em);
+            }
+
+            15%,
+            25% {
+                transform: translateY(0em);
+            }
+
+            35%,
+            45% {
+                transform: translateY(1.2em);
+            }
+
+            55%,
+            65% {
+                transform: translateY(2.4em);
+            }
+
+            75%,
+            85% {
+                transform: translateY(3.6em);
+            }
+
+            100% {
+                transform: translateY(4.8em);
+            }
+        }
+    </style>
+    <style>
+        .typewriter-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.1em;
+            background-color: #94422e;
+            margin-left: 2px;
+            vertical-align: middle;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+
+            from,
+            to {
+                background-color: transparent;
+            }
+
+            50% {
+                background-color: #94422e;
+            }
+        }
+
+        .typewriter-text {
+            color: #94422e;
+            font-style: italic;
+            border-bottom: 2px solid rgba(148, 66, 46, 0.3);
+            min-width: 0;
+            display: inline-block;
+        }
+    </style>
+    <style>
+        .organic-circle-mask {
+            border-radius: 48% 52% 56% 44% / 45% 55% 45% 55%;
+            transition: border-radius 1s ease-in-out;
+            background: theme('colors.surface-container');
+        }
+
+        .organic-circle-mask:hover {
+            border-radius: 50%;
+        }
+
+        .portrait-container {
+            filter: drop-shadow(0 20px 50px rgba(148, 66, 46, 0.12));
+        }
+    </style>
+    <style>
+        /* Cases section styles */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+    <style>
+        /* Services section styles */
+        .ambient-shadow {
+            box-shadow: 0 20px 40px -10px rgba(27, 28, 26, 0.06);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-surface text-on-surface font-body antialiased min-h-screen flex flex-col selection:bg-primary-container selection:text-on-primary-container relative bg-noise">
+    <!-- ============================================================
+     NAVIGATION — from 4.philosophy (unchanged)
+     ============================================================ -->
+    <header
+        class="sticky top-0 w-full z-50 bg-[#fbf9f5]/80 dark:bg-[#1b1c1a]/80 backdrop-blur-xl after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-full after:bg-[#1b1c1a]/5 flat-no-shadows">
+        <div class="flex justify-between items-center px-12 py-8 max-w-[1920px] mx-auto">
+            <div class="text-[#94422e] dark:text-[#b35a44]">
+                <span class="text-2xl font-serif italic tracking-tighter text-[#1b1c1a] dark:text-[#fbf9f5]"
+                    style="">Wuyaqi</span>
+            </div>
+            <div class="hidden md:flex items-center gap-10">
+                <nav class="flex items-center gap-10">
+                    <a class="text-[#55433e] dark:text-[#e4e2de] font-sans text-xs uppercase tracking-[0.2em] font-medium hover:text-[#94422e] dark:hover:text-[#b35a44] transition-all duration-500 ease-in-out"
+                        href="#" style="">Cases</a>
+                    <a class="text-[#55433e] dark:text-[#e4e2de] font-sans text-xs uppercase tracking-[0.2em] font-medium hover:text-[#94422e] dark:hover:text-[#b35a44] transition-all duration-500 ease-in-out"
+                        href="#" style="">Services</a>
+                    <a class="hidden text-[#55433e] dark:text-[#e4e2de] font-sans text-xs uppercase tracking-[0.2em] font-medium hover:text-[#94422e] dark:hover:text-[#b35a44] transition-all duration-500 ease-in-out"
+                        href="#" style="">Insights</a>
+                    <a class="text-[#55433e] dark:text-[#e4e2de] font-sans text-xs uppercase tracking-[0.2em] font-medium hover:text-[#94422e] dark:hover:text-[#b35a44] transition-all duration-500 ease-in-out"
+                        href="#" style="">About</a>
+                </nav>
+                <a href="#" data-book-link
+                    class="inline-block bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-md px-6 py-3 font-label text-sm font-semibold hover:opacity-90 transition-opacity active:scale-[0.98]"
+                    style="">
+                    Let's talk
+                </a>
+            </div>
+            <!-- Mobile Menu Toggle (Decorative) -->
+            <button class="md:hidden text-on-surface" style="">
+                <span class="material-symbols-outlined text-2xl" style="">menu</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ============================================================
+     SECTION 1 — HERO (unchanged main from 1.hero)
+     ============================================================ -->
+    <main class="flex items-center justify-center relative overflow-hidden min-h-[calc(100vh-6.5rem)]">
+        <!-- Ambient Background Depth -->
+        <div class="ambient-glow"></div>
+        <!-- Abstract Architectural Background Elements -->
+        <div class="absolute top-1/4 left-10 w-64 h-64 rounded-full bg-surface-container-low opacity-50 blur-3xl -z-10">
+        </div>
+        <div class="absolute bottom-1/4 right-10 w-96 h-96 rounded-full bg-tertiary-fixed opacity-40 blur-3xl -z-10">
+        </div>
+        <div
+            class="max-w-7xl mx-auto px-6 md:px-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+            <!-- Left Side: Typography & Intent -->
+            <div class="col-span-1 lg:col-span-8 flex flex-col space-y-8 z-20">
+                <div class="space-y-6">
+                    <h1 class="font-headline text-4xl md:text-6xl text-on-surface tracking-tight leading-[0.95]"
+                        style="">
+                        Hi, I'm <span class="italic text-primary" style="">Wuyaqi.</span>
+                    </h1>
+                    <h2 class="font-headline text-xl md:text-3xl text-on-surface-variant font-light tracking-normal max-w-3xl leading-tight"
+                        style="">
+                        <div class="flex flex-col text-xl md:text-3xl text-on-surface-variant font-light font-headline">
+                            <div class="min-h-[1.2em] flex items-center">
+                                <span class="mr-3" style="">I'm a</span>
+                                <span class="inline-flex items-center" style="">
+                                    <span class="typewriter-text" id="typewriter-target" style="">resea</span>
+                                    <span class="typewriter-cursor"></span>
+                                </span>
+                            </div>
+                            <div class="text-xl md:text-3xl text-on-surface-variant font-light font-headline" style="">
+                                who architects AI that amplifies humans.
+                            </div>
+                        </div>
+                    </h2>
+                </div>
+                <p class="font-body text-base md:text-lg text-on-surface-variant/80 max-w-2xl leading-relaxed font-light"
+                    style="">Deep enough to build multi-agent systems from scratch. Close enough to the business to know
+                    which problems are actually worth solving.</p>
+                <div
+                    class="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-6 pt-4">
+                    <button
+                        class="px-6 py-3 rounded-md border border-primary bg-transparent text-primary font-label text-sm tracking-widest uppercase hover:shadow-[0_20px_40px_rgba(148,66,46,0.2)] transition-all duration-300 flex items-center space-x-2"
+                        style="">
+                        <span class="" style="">View Portfolio</span>
+                        <span class="material-symbols-outlined text-sm" style="">arrow_forward</span>
+                    </button>
+                </div>
+            </div>
+            <!-- Right Side: Antigravity 3D Frame Visual -->
+            <div
+                class="col-span-1 lg:col-span-4 hidden lg:flex justify-center items-center relative h-full min-h-[500px]">
+                <!-- Portrait Container -->
+                <div class="relative portrait-container group">
+                    <!-- The Portrait -->
+                    <div
+                        class="w-72 h-72 md:w-80 md:h-80 organic-circle-mask overflow-hidden border border-outline-variant/20 p-2 bg-white/30 backdrop-blur-sm">
+                        <img alt="Wuyaqi Portrait"
+                            class="w-full h-full object-cover rounded-full grayscale-[0.2] contrast-[1.05]"
+                            src="https://lh3.googleusercontent.com/aida/ADBb0ugxdrO7Ed71GkdsiPQNFCplCqIcOyBwNXWK5J9E4AvNeZbcVgwxHNokbv-gBrkHxHU49YNQAfAXTiFo6onS4fcoMpbiujQZlFQnJ41SqGmbuYccUJqOL4dc126HyE5tRcyLavf1SijKeEw3z2hQGI_fgmoUex-nN4KaX4xoD6Omf-eFZ4pInd2R2qlQew65Ecm0pw4YWBOUQoAKttPEMy17iMqJUR-0JSvNNLOFqxwnvyuD-wI0lTjO3CgvVLSZpQ73-ezHB5uKIg" />
+                    </div>
+                    <!-- Orbiting Elements - Repositioned for the portrait -->
+                    <div
+                        class="absolute w-12 h-12 rounded-full glass-panel -top-4 -right-4 flex items-center justify-center text-primary shadow-lg border border-white/40 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-700">
+                        <span class="material-symbols-outlined text-sm">architecture</span>
+                    </div>
+                    <div
+                        class="absolute w-10 h-10 rounded-full glass-panel -bottom-2 -left-4 flex items-center justify-center text-primary/70 shadow-lg border border-white/30 group-hover:-translate-x-1 group-hover:translate-y-1 transition-transform duration-700">
+                        <span class="material-symbols-outlined text-sm">psychology</span>
+                    </div>
+                    <!-- Subtle Ambient Glow behind portrait -->
+                    <div class="absolute -inset-4 bg-primary/5 blur-3xl -z-10 rounded-full"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ============================================================
+     SECTION 2 — CASES (unchanged main from 2.cases)
+     ============================================================ -->
+    <main class="pt-32 pb-24 max-w-7xl mx-auto px-4 sm:px-8">
+        <!-- Section Header -->
+        <div class="mb-20 max-w-3xl border-l-2 border-primary-container pl-8 py-2">
+            <h1 class="font-headline text-5xl md:text-7xl text-on-surface tracking-tight mb-6 leading-tight">The
+                deployed <br />
+                <font color="#55433e"><i>Works</i></font>
+            </h1>
+            <p class="font-body text-xl text-on-surface-variant leading-relaxed max-w-2xl">
+                A curated selection of autonomous systems and intelligent architectures deployed for enterprise scale
+                and personal utility.
+            </p>
+        </div>
+        <!-- Enterprise Cases Section -->
+        <section class="mb-32">
+            <div class="flex items-center gap-4 mb-10">
+                <h2 class="font-body text-sm font-bold tracking-[0.1em] uppercase text-primary">Enterprise Cases</h2>
+                <div class="flex-1 h-[1px] bg-outline-variant opacity-30"></div>
+            </div>
+            <!-- Horizontal Scroll Container -->
+            <div class="flex overflow-x-auto gap-8 pb-12 snap-x snap-mandatory no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0">
+                <!-- Case Card 1: XPeng -->
+                <article
+                    class="snap-start flex-none w-[85vw] sm:w-[600px] md:w-[700px] bg-surface-container-high rounded-2xl p-8 md:p-12 shadow-[0_30px_60px_rgba(27,28,26,0.04)] relative group transition-transform duration-500 hover:-translate-y-1">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    </div>
+                    <div class="relative z-10 flex flex-col h-full">
+                        <div class="mb-8">
+                            <span
+                                class="inline-block px-3 py-1 bg-surface-container-lowest text-on-surface-variant text-xs font-bold tracking-widest uppercase rounded-full mb-6">XPeng
+                                Motors</span>
+                            <h3 class="font-headline text-3xl md:text-4xl text-on-surface leading-snug mb-4">
+                                Turning 10,000 voices into clarity.
+                            </h3>
+                            <p class="font-body text-on-surface-variant leading-relaxed text-base md:text-lg">
+                                XPeng's overseas team was drowning in customer feedback — 8 channels, 10,000+ entries
+                                per month, no unified view. I built the system that changed that.
+                            </p>
+                        </div>
+                        <div class="mt-auto pt-8 flex flex-wrap gap-8 md:gap-12">
+                            <div>
+                                <div class="font-headline text-2xl md:text-3xl text-primary mb-1">71%~95%</div>
+                                <div
+                                    class="font-body text-xs uppercase tracking-wider text-on-surface-variant font-semibold">
+                                    Classification accuracy</div>
+                                <div class="font-body text-xs text-outline mt-1">Up from 23%</div>
+                            </div>
+                            <div>
+                                <div class="font-headline text-2xl md:text-3xl text-primary mb-1">1 Day</div>
+                                <div
+                                    class="font-body text-xs uppercase tracking-wider text-on-surface-variant font-semibold">
+                                    Cycle time reduced</div>
+                                <div class="font-body text-xs text-outline mt-1">Down from 8 days</div>
+                            </div>
+                            <div>
+                                <div class="font-headline text-2xl md:text-3xl text-primary mb-1">1 View</div>
+                                <div
+                                    class="font-body text-xs uppercase tracking-wider text-on-surface-variant font-semibold">
+                                    Channels unified</div>
+                                <div class="font-body text-xs text-outline mt-1">Combined from 8</div>
+                            </div>
+                        </div>
+                        <a class="mt-12 inline-flex items-center gap-2 text-on-surface font-semibold hover:text-primary transition-colors group/link w-fit"
+                            href="#">
+                            Read full case
+                            <span
+                                class="material-symbols-outlined text-sm transition-transform group-hover/link:translate-x-1">arrow_forward</span>
+                        </a>
+                    </div>
+                </article>
+                <!-- Case Card 2: BMW -->
+                <article
+                    class="snap-start flex-none w-[85vw] sm:w-[600px] md:w-[700px] bg-surface-container-high rounded-2xl p-8 md:p-12 shadow-[0_30px_60px_rgba(27,28,26,0.04)] relative group transition-transform duration-500 hover:-translate-y-1">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    </div>
+                    <div class="relative z-10 flex flex-col h-full">
+                        <div class="mb-8">
+                            <span
+                                class="inline-block px-3 py-1 bg-surface-container-lowest text-on-surface-variant text-xs font-bold tracking-widest uppercase rounded-full mb-6">BMW</span>
+                            <h3 class="font-headline text-3xl md:text-4xl text-on-surface leading-snug mb-4">
+                                Precision Retrieval for the Ultimate Driving Machine.
+                            </h3>
+                            <p class="font-body text-on-surface-variant leading-relaxed text-base md:text-lg">
+                                Building a high-performance RAG-based AI Agent for knowledge base to ensure technical
+                                data is accessible...
+                            </p>
+                        </div>
+                        <div class="mt-auto pt-8 flex flex-wrap gap-8 md:gap-12">
+                            <div>
+                                <div class="font-headline text-2xl md:text-3xl text-primary mb-1">&lt; 1.2s</div>
+                                <div
+                                    class="font-body text-xs uppercase tracking-wider text-on-surface-variant font-semibold">
+                                    Low Latency</div>
+                            </div>
+                            <div>
+                                <div class="font-headline text-2xl md:text-3xl text-primary mb-1">98.5%</div>
+                                <div
+                                    class="font-body text-xs uppercase tracking-wider text-on-surface-variant font-semibold">
+                                    High Accuracy</div>
+                            </div>
+                            <div>
+                                <div class="font-headline text-2xl md:text-3xl text-primary mb-1">500+</div>
+                                <div
+                                    class="font-body text-xs uppercase tracking-wider text-on-surface-variant font-semibold">
+                                    Daily Active Users</div>
+                            </div>
+                        </div>
+                        <a class="mt-12 inline-flex items-center gap-2 text-on-surface font-semibold hover:text-primary transition-colors group/link w-fit"
+                            href="#">
+                            Read full case
+                            <span
+                                class="material-symbols-outlined text-sm transition-transform group-hover/link:translate-x-1">arrow_forward</span>
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </section>
+        <!-- Personal Cases Section -->
+        <section>
+            <div class="flex items-center gap-4 mb-10">
+                <h2 class="font-body text-sm font-bold tracking-[0.1em] uppercase text-primary">Personal Cases</h2>
+                <div class="flex-1 h-[1px] bg-outline-variant opacity-30"></div>
+            </div>
+            <!-- Horizontal Scroll Container -->
+            <div class="flex overflow-x-auto gap-8 pb-12 snap-x snap-mandatory no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0">
+                <!-- Case Card 1 -->
+                <article
+                    class="snap-start flex-none w-[80vw] sm:w-[450px] bg-surface-container-low rounded-2xl p-8 relative group">
+                    <div
+                        class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center mb-8">
+                        <span class="material-symbols-outlined text-primary text-xl">work</span>
+                    </div>
+                    <h3 class="font-headline text-2xl text-on-surface mb-4">Job Search AI Native App</h3>
+                    <p class="font-body text-on-surface-variant leading-relaxed text-sm">
+                        Automating the search and application process with intelligent matching, reasoning over
+                        candidate experience versus role requirements.
+                    </p>
+                </article>
+                <!-- Case Card 2 -->
+                <article
+                    class="snap-start flex-none w-[80vw] sm:w-[450px] bg-surface-container-low rounded-2xl p-8 relative group">
+                    <div
+                        class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center mb-8">
+                        <span class="material-symbols-outlined text-primary text-xl">record_voice_over</span>
+                    </div>
+                    <h3 class="font-headline text-2xl text-on-surface mb-4">Digital Twin Social Media Ops</h3>
+                    <p class="font-body text-on-surface-variant leading-relaxed text-sm">
+                        A system that mirrors creator voice for authentic automated engagement, managing asynchronous
+                        communication streams.
+                    </p>
+                </article>
+                <!-- Case Card 3 -->
+                <article
+                    class="snap-start flex-none w-[80vw] sm:w-[450px] bg-surface-container-low rounded-2xl p-8 relative group">
+                    <div
+                        class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center mb-8">
+                        <span class="material-symbols-outlined text-primary text-xl">hub</span>
+                    </div>
+                    <h3 class="font-headline text-2xl text-on-surface mb-4">5-Agent Dev Team</h3>
+                    <p class="font-body text-on-surface-variant leading-relaxed text-sm">
+                        An autonomous ensemble of agents collaborating on complex software tasks, utilizing specialized
+                        sub-routines for planning, coding, and review.
+                    </p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- ============================================================
+     SECTION 3 — SERVICES (unchanged main from 3.services)
+     ============================================================ -->
+    <main class="flex-grow pt-24 pb-32">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 relative flex flex-col md:flex-row gap-16 lg:gap-24">
+            <!-- Left Column: Sticky Narrative -->
+            <div class="w-full md:w-6/12 relative">
+                <div class="md:sticky md:top-40 flex flex-col gap-12 pb-24">
+                    <!-- Narrative Header -->
+                    <div class="border-l-2 border-[#B35A44] pl-8 py-2">
+                        <h1
+                            class="font-headline text-5xl lg:text-7xl text-on-surface tracking-tight mb-6 leading-tight">
+                            The Architecture <br />
+                            <span class="italic text-on-surface-variant font-light">of Intelligence</span>
+                        </h1>
+                        <p class="font-body text-on-surface-variant text-xl leading-relaxed max-w-md">
+                            A structured approach to transforming raw potential into deployed, multi-agent systems.
+                        </p>
+                    </div>
+                    <!-- Scrollytelling Text Nodes -->
+                    <div class="flex flex-col gap-48 mt-24 md:mt-32">
+                        <!-- Phase 1 Text -->
+                        <div class="flex flex-col gap-8" id="phase-1-text">
+                            <div class="flex items-center gap-6">
+                                <div
+                                    class="w-12 h-12 rounded-full border-2 border-[#B35A44] flex items-center justify-center">
+                                    <span class="font-headline text-xl text-[#B35A44] font-bold">01</span>
+                                </div>
+                                <h2 class="font-headline text-5xl md:text-6xl text-[#B35A44] tracking-tight">See Clearly
+                                </h2>
+                            </div>
+                            <h3 class="font-body text-xl md:text-2xl text-on-surface font-medium max-w-lg leading-snug">
+                                1:1 advisory on AI readiness &amp; transformation roadmap
+                            </h3>
+                            <div class="border-l-4 border-[#B35A44]/30 pl-8 py-4">
+                                <p
+                                    class="font-headline text-2xl md:text-3xl italic text-on-surface-variant leading-relaxed">
+                                    "What's worth building — and what's not."
+                                </p>
+                            </div>
+                        </div>
+                        <!-- Phase 2 Text -->
+                        <div class="flex flex-col gap-8 opacity-40 hover:opacity-100 transition-opacity duration-500"
+                            id="phase-2-text">
+                            <div class="flex items-center gap-6">
+                                <div
+                                    class="w-12 h-12 rounded-full border-2 border-[#B35A44] flex items-center justify-center">
+                                    <span class="font-headline text-xl text-[#B35A44] font-bold">02</span>
+                                </div>
+                                <h2 class="font-headline text-5xl md:text-6xl text-[#B35A44] tracking-tight">Think
+                                    Together</h2>
+                            </div>
+                            <h3 class="font-body text-xl md:text-2xl text-on-surface font-medium max-w-lg leading-snug">
+                                Team workshops for AI alignment &amp; use-case discovery
+                            </h3>
+                            <div class="border-l-4 border-[#B35A44]/30 pl-8 py-4">
+                                <p
+                                    class="font-headline text-2xl md:text-3xl italic text-on-surface-variant leading-relaxed">
+                                    "Get your people on board before the system goes live."
+                                </p>
+                            </div>
+                        </div>
+                        <!-- Phase 3 Text -->
+                        <div class="flex flex-col gap-8 opacity-40 hover:opacity-100 transition-opacity duration-500"
+                            id="phase-3-text">
+                            <div class="flex items-center gap-6">
+                                <div
+                                    class="w-12 h-12 rounded-full border-2 border-[#B35A44] flex items-center justify-center">
+                                    <span class="font-headline text-xl text-[#B35A44] font-bold">03</span>
+                                </div>
+                                <h2 class="font-headline text-5xl md:text-6xl text-[#B35A44] tracking-tight">Build It
+                                </h2>
+                            </div>
+                            <h3 class="font-body text-xl md:text-2xl text-on-surface font-medium max-w-lg leading-snug">
+                                Multi-agent system design &amp; production deployment
+                            </h3>
+                            <div class="border-l-4 border-[#B35A44]/30 pl-8 py-4">
+                                <p
+                                    class="font-headline text-2xl md:text-3xl italic text-on-surface-variant leading-relaxed">
+                                    "A working system, not a slide deck."
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Right Column: Scrolling Visuals (Emptied for 3D Backgrounds) -->
+            <div class="w-full md:w-6/12 flex flex-col gap-48 py-12 md:py-48">
+                <!-- Phase 1 Visual Area -->
+                <div class="w-full h-[60vh]" id="phase-1-visual">
+                </div>
+                <!-- Phase 2 Visual Area -->
+                <div class="w-full h-[60vh]" id="phase-2-visual">
+                </div>
+                <!-- Phase 3 Visual Area -->
+                <div class="w-full h-[60vh]" id="phase-3-visual">
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ============================================================
+     SECTION 4 — PHILOSOPHY (unchanged main from 4.philosophy)
+     ============================================================ -->
+    <main
+        class="flex-grow flex items-center justify-center relative w-full px-8 md:px-24 py-32 bg-surface-container-low min-h-[819px]">
+        <!-- Subtle gradient orb for ambient warmth -->
+        <div
+            class="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-primary-container/5 rounded-full blur-[100px] pointer-events-none">
+        </div>
+        <div
+            class="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-tertiary-container/5 rounded-full blur-[120px] pointer-events-none">
+        </div>
+        <div class="max-w-5xl mx-auto relative z-10">
+            <!-- Decorative quote mark -->
+            <div aria-hidden="true"
+                class="absolute -top-16 -left-12 text-primary/10 font-headline text-9xl leading-none select-none"
+                style="">"</div>
+            <blockquote class="text-on-surface tracking-tight">
+                <div class="flex flex-col gap-12">
+                    <h2
+                        class="font-headline text-4xl md:text-5xl lg:text-7xl tracking-tight leading-tight md:leading-tight italic font-light bg-gradient-to-r from-on-surface via-primary to-on-surface bg-clip-text text-transparent">
+                        Technology should disappear into the way people already work.
+                    </h2>
+                    <p
+                        class="font-headline text-xl md:text-2xl text-on-surface-variant leading-relaxed max-w-3xl font-normal">
+                        I redesign workflows with AI that eliminates friction — so your team spends less time on what
+                        drains them and more time on what only humans can do: <em class="text-primary italic">create,
+                            connect and decide.</em>
+                    </p>
+                </div>
+            </blockquote>
+            <!-- Architectural Signature -->
+            <div class="mt-20 flex items-center gap-6">
+                <div class="w-12 h-[1px] bg-outline-variant/40"></div>
+                <div class="flex flex-col">
+                    <span class="font-label text-xs uppercase tracking-[0.2em] text-on-surface-variant font-medium"
+                        style="">Core Philosophy</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ============================================================
+     SECTION 5 — CONTACT (unchanged main from 5.contact)
+     ============================================================ -->
+    <main
+        class="flex-grow pt-32 pb-24 px-8 md:px-16 max-w-screen-2xl mx-auto w-full flex flex-col md:flex-row gap-16 md:gap-32 items-start mt-12">
+        <!-- Left Side: Personal Details (Human at the Core) -->
+        <section class="w-full md:w-1/2 flex flex-col gap-12">
+            <div>
+                <h1 class="font-headline text-5xl md:text-7xl font-light tracking-tight text-on-surface mb-6" style="">
+                    Wuyaqi Yin
+                </h1>
+                <p class="font-headline text-2xl md:text-3xl italic text-on-surface-variant font-light max-w-lg"
+                    style="">
+                    Bridging human and AI agents.
+                </p>
+            </div>
+            <div class="flex flex-col gap-8 mt-4 border-l border-outline-variant/30 pl-6">
+                <div class="flex items-start gap-4">
+                    <span class="material-symbols-outlined text-primary/80 mt-1"
+                        style="font-variation-settings: &quot;FILL&quot; 0;">location_on</span>
+                    <div>
+                        <h3 class="font-label text-sm tracking-[0.1em] text-on-surface-variant uppercase mb-1" style="">
+                            Base</h3>
+                        <p class="font-body text-lg text-on-surface flex items-center gap-2" style="">Munich, Germany
+                            (Open to relocate)</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4">
+                    <span class="material-symbols-outlined text-primary/80 mt-1"
+                        style="font-variation-settings: &quot;FILL&quot; 0;">school</span>
+                    <div>
+                        <h3 class="font-label text-sm tracking-[0.1em] text-on-surface-variant uppercase mb-1" style="">
+                            Education</h3>
+                        <p class="font-body text-lg text-on-surface flex items-center gap-2" style="">M. Sc. Consumer
+                            Science</p>
+                        <p class="font-body text-on-surface-variant" style="">Technical University of Munich</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4">
+                    <span class="material-symbols-outlined text-primary/80 mt-1"
+                        style="font-variation-settings: &quot;FILL&quot; 0;">work_history</span>
+                    <div>
+                        <h3 class="font-label text-sm tracking-[0.1em] text-on-surface-variant uppercase mb-1" style="">
+                            Previously</h3>
+                        <p class="font-body text-lg text-on-surface flex items-center gap-2" style="">XPeng <span
+                                class="text-outline-variant/50" style="">•</span> BMW <span
+                                class="text-outline-variant/50" style="">•</span> GenAI Lab <span
+                                class="text-outline-variant/50" style="">•</span> Capgemini</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Right Side: Contact Methods (Architectural restraint) -->
+        <section class="w-full md:w-1/2 flex flex-col gap-8 md:mt-16">
+            <a class="group relative block w-full p-5 bg-surface-container-low rounded-lg transition-all duration-500 hover:bg-surface-container-highest border border-outline-variant/10"
+                href="mailto:hello@wuyaqiyin.com" style="">
+                <div class="flex justify-between items-end">
+                    <div>
+                        <h2 class="font-label text-[10px] tracking-[0.2em] text-on-surface-variant uppercase mb-2"
+                            style="">Direct Inquiry</h2>
+                        <p class="font-headline text-2xl text-on-surface group-hover:text-primary transition-colors duration-300"
+                            style="">
+                            Email
+                        </p>
+                    </div>
+                    <span
+                        class="material-symbols-outlined text-on-surface-variant group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300 text-xl font-light"
+                        style="">north_east</span>
+                </div>
+            </a>
+            <a class="group relative block w-full p-5 bg-surface-container-low rounded-lg transition-all duration-500 hover:bg-surface-container-highest border border-outline-variant/10"
+                href="#" style="">
+                <div class="flex justify-between items-end">
+                    <div>
+                        <h2 class="font-label text-[10px] tracking-[0.2em] text-on-surface-variant uppercase mb-2"
+                            style="">Professional Network</h2>
+                        <p class="font-headline text-2xl text-on-surface group-hover:text-primary transition-colors duration-300"
+                            style="">
+                            LinkedIn
+                        </p>
+                    </div>
+                    <span
+                        class="material-symbols-outlined text-on-surface-variant group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300 text-xl font-light"
+                        style="">north_east</span>
+                </div>
+            </a>
+            <a class="group relative block w-full p-8 bg-primary text-on-primary rounded-xl transition-all duration-500 hover:brightness-110 shadow-lg hover:shadow-primary/20"
+                href="#" data-book-link style="">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h2 class="font-label text-xs tracking-[0.2em] text-on-primary/70 uppercase mb-2" style="">
+                            Available for Projects</h2>
+                        <p class="font-headline text-3xl" style="">Schedule a Consultation</p>
+                    </div>
+                    <span
+                        class="material-symbols-outlined text-3xl font-light group-hover:translate-x-1 transition-transform duration-300"
+                        style="">arrow_forward</span>
+                </div>
+            </a>
+        </section>
+    </main>
+
+    <!-- ============================================================
+     FOOTER — from 5.contact (unchanged)
+     ============================================================ -->
+    <footer
+        class="w-full mt-20 bg-[#f5f3ef] dark:bg-[#121211] flex flex-col md:flex-row justify-between items-center px-12 py-16 gap-8 border-t border-[#dbc1bb]/10 tonal-shift-no-border flat opacity-100 hover:opacity-80">
+        <p class="font-['Manrope'] text-xs tracking-[0.2em] uppercase text-[#55433e] dark:text-[#e4e2de] text-center md:text-left"
+            style="">
+            © 2024 Architectural Intent. Designed for the Digital Atelier.
+        </p>
+        <div class="flex gap-6 flex-wrap justify-center">
+            <a class="font-['Manrope'] text-xs tracking-[0.2em] uppercase text-[#55433e]/60 dark:text-[#e4e2de]/60 hover:text-[#94422e] dark:hover:text-[#b35a44] transition-all"
+                href="#" style="">Journal</a>
+            <a class="font-['Manrope'] text-xs tracking-[0.2em] uppercase text-[#55433e]/60 dark:text-[#e4e2de]/60 hover:text-[#94422e] dark:hover:text-[#b35a44] transition-all"
+                href="#" style="">Archive</a>
+            <a class="font-['Manrope'] text-xs tracking-[0.2em] uppercase text-[#55433e]/60 dark:text-[#e4e2de]/60 hover:text-[#94422e] dark:hover:text-[#b35a44] transition-all"
+                href="#" style="">Studio Policy</a>
+            <a class="font-['Manrope'] text-xs tracking-[0.2em] uppercase text-[#55433e]/60 dark:text-[#e4e2de]/60 hover:text-[#94422e] dark:hover:text-[#b35a44] transition-all"
+                href="#" style="">Accessibility</a>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+     SHARED CONFIG — single source of truth for booking link
+     ============================================================ -->
+    <script>
+        // TODO: replace '#' with the real booking URL (Calendly, Cal.com, etc.)
+        const BOOK_URL = '#';
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('[data-book-link]').forEach(el => {
+                el.setAttribute('href', BOOK_URL);
+                if (BOOK_URL !== '#') {
+                    el.setAttribute('target', '_blank');
+                    el.setAttribute('rel', 'noopener noreferrer');
+                }
+            });
+        });
+    </script>
+
+    <!-- ============================================================
+     SCRIPT — typewriter effect from 1.hero (unchanged)
+     ============================================================ -->
+    <script>
+        const words = ['builder', 'researcher', 'consultant', 'educator'];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typingSpeed = 150;
+        const deletingSpeed = 75;
+        const pauseTime = 2000;
+
+        function type() {
+            const currentWord = words[wordIndex];
+            const target = document.getElementById('typewriter-target');
+
+            if (isDeleting) {
+                target.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                target.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? deletingSpeed : typingSpeed;
+
+            if (!isDeleting && charIndex === currentWord.length) {
+                typeSpeed = pauseTime;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+                typeSpeed = 500;
+                target.textContent = ''; // Ensure complete clear
+            }
+
+            setTimeout(type, typeSpeed);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const target = document.getElementById('typewriter-target');
+            target.textContent = '';
+            setTimeout(type, 1000);
+        });
+    </script>
+</body>
+
+</html>
