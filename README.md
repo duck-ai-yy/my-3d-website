@@ -6,7 +6,7 @@
 
 # Wuyaqi Yin — AI Agent Architect
 
-[![Site Preview](preview.png)](https://duck-ai-yy.github.io/my-3d-website/design/prototype/)
+[![Site Preview](preview.png)](https://duck-ai-yy.github.io/my-3d-website/)
 
 > Click the image to visit the live site →
 
@@ -36,7 +36,7 @@ I believe everyone deserves access to that kind of amplification. That's the wor
 
 # Wuyaqi — AI Agent 架构师
 
-[![网站预览](preview.png)](https://duck-ai-yy.github.io/my-3d-website/design/prototype/)
+[![网站预览](preview.png)](https://duck-ai-yy.github.io/my-3d-website/)
 
 > 点击图片直接进入网站 →
 
