@@ -247,32 +247,43 @@
      ============================================================ -->
     <header
         class="sticky top-0 w-full z-50 bg-[#fbf9f5]/80 dark:bg-[#1b1c1a]/80 backdrop-blur-xl after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-full after:bg-[#1b1c1a]/5 flat-no-shadows">
-        <div class="flex justify-between items-center px-12 py-4 max-w-[1920px] mx-auto">
+        <div class="flex justify-between items-center px-5 md:px-12 py-2 max-w-[1920px] mx-auto">
             <div class="flex flex-col gap-0">
                 <span class="text-2xl font-serif italic tracking-tighter text-[#1b1c1a] dark:text-[#fbf9f5] leading-tight">Wuyaqi</span>
                 <span class="font-sans text-[10px] uppercase tracking-[0.18em] text-[#55433e]/60 dark:text-[#e4e2de]/60">AI Agent Architect</span>
             </div>
             <div class="hidden md:flex items-center gap-10">
                 <nav class="flex items-center gap-10">
-                    <a class="text-[#55433e] dark:text-[#e4e2de] font-sans text-xs uppercase tracking-[0.2em] font-medium hover:text-[#94422e] dark:hover:text-[#b35a44] transition-all duration-500 ease-in-out"
-                        href="#" style="">Cases</a>
-                    <a class="text-[#55433e] dark:text-[#e4e2de] font-sans text-xs uppercase tracking-[0.2em] font-medium hover:text-[#94422e] dark:hover:text-[#b35a44] transition-all duration-500 ease-in-out"
-                        href="#" style="">Services</a>
-                    <a class="hidden text-[#55433e] dark:text-[#e4e2de] font-sans text-xs uppercase tracking-[0.2em] font-medium hover:text-[#94422e] dark:hover:text-[#b35a44] transition-all duration-500 ease-in-out"
-                        href="#" style="">Insights</a>
-                    <a class="text-[#55433e] dark:text-[#e4e2de] font-sans text-xs uppercase tracking-[0.2em] font-medium hover:text-[#94422e] dark:hover:text-[#b35a44] transition-all duration-500 ease-in-out"
-                        href="#" style="">About</a>
+                    <a class="nav-scroll-link text-[#55433e] dark:text-[#e4e2de] font-sans text-xs uppercase tracking-[0.2em] font-medium hover:text-[#94422e] dark:hover:text-[#b35a44] transition-all duration-500 ease-in-out"
+                        href="#cases">Cases</a>
+                    <a class="nav-scroll-link text-[#55433e] dark:text-[#e4e2de] font-sans text-xs uppercase tracking-[0.2em] font-medium hover:text-[#94422e] dark:hover:text-[#b35a44] transition-all duration-500 ease-in-out"
+                        href="#services">Services</a>
+                    <a class="nav-scroll-link text-[#55433e] dark:text-[#e4e2de] font-sans text-xs uppercase tracking-[0.2em] font-medium hover:text-[#94422e] dark:hover:text-[#b35a44] transition-all duration-500 ease-in-out"
+                        href="#about">About</a>
                 </nav>
                 <a href="#" data-book-link
-                    class="inline-block bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-md px-6 py-3 font-label text-sm font-semibold hover:opacity-90 transition-opacity active:scale-[0.98]"
+                    class="inline-block bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-md px-4 py-2 font-label text-xs font-semibold hover:opacity-90 transition-opacity active:scale-[0.98]"
                     style="">
                     Let's talk
                 </a>
             </div>
-            <!-- Mobile Menu Toggle (Decorative) -->
-            <button class="md:hidden text-on-surface" style="">
-                <span class="material-symbols-outlined text-2xl" style="">menu</span>
+            <!-- Mobile Menu Toggle -->
+            <button id="mobile-menu-btn" class="md:hidden text-on-surface" aria-label="Open menu">
+                <span class="material-symbols-outlined text-2xl" id="mobile-menu-icon">menu</span>
             </button>
+        </div>
+        <!-- Mobile Drawer -->
+        <div id="mobile-menu"
+            class="md:hidden hidden flex-col gap-0 bg-[#fbf9f5]/95 backdrop-blur-xl border-t border-[#1b1c1a]/5">
+            <a href="#cases" class="mobile-nav-link px-5 py-4 font-sans text-xs uppercase tracking-[0.2em] font-medium text-[#55433e] border-b border-[#1b1c1a]/5 hover:text-[#94422e] transition-colors">Cases</a>
+            <a href="#services" class="mobile-nav-link px-5 py-4 font-sans text-xs uppercase tracking-[0.2em] font-medium text-[#55433e] border-b border-[#1b1c1a]/5 hover:text-[#94422e] transition-colors">Services</a>
+            <a href="#about" class="mobile-nav-link px-5 py-4 font-sans text-xs uppercase tracking-[0.2em] font-medium text-[#55433e] border-b border-[#1b1c1a]/5 hover:text-[#94422e] transition-colors">About</a>
+            <div class="px-5 py-4">
+                <a href="#" data-book-link
+                    class="inline-block bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-md px-4 py-2 font-label text-xs font-semibold hover:opacity-90 transition-opacity">
+                    Let's talk
+                </a>
+            </div>
         </div>
     </header>
 
@@ -283,9 +294,9 @@
         <!-- Ambient Background Depth -->
         <div class="ambient-glow"></div>
         <!-- Abstract Architectural Background Elements -->
-        <div class="absolute top-1/4 left-10 w-64 h-64 rounded-full bg-surface-container-low opacity-50 blur-3xl -z-10">
+        <div class="absolute top-1/4 left-10 w-32 h-32 md:w-64 md:h-64 rounded-full bg-surface-container-low opacity-50 blur-3xl -z-10">
         </div>
-        <div class="absolute bottom-1/4 right-10 w-96 h-96 rounded-full bg-tertiary-fixed opacity-40 blur-3xl -z-10">
+        <div class="absolute bottom-1/4 right-10 w-48 h-48 md:w-96 md:h-96 rounded-full bg-tertiary-fixed opacity-40 blur-3xl -z-10">
         </div>
         <div
             class="max-w-7xl mx-auto px-6 md:px-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
@@ -316,7 +327,7 @@
                     style="">Deep enough to build multi-agent systems from scratch.<br>Close enough to the business to know which problems are actually worth solving.</p>
                 <div
                     class="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-6 pt-4">
-                    <a href="#cases"
+                    <a href="#cases" id="see-the-work-btn"
                         class="px-6 py-3 rounded-md border border-primary bg-transparent text-primary font-label font-semibold text-sm tracking-wide hover:shadow-[0_20px_40px_rgba(148,66,46,0.2)] transition-all duration-300 flex items-center space-x-2 w-fit">
                         <span>See the work</span>
                         <span class="material-symbols-outlined text-sm">arrow_forward</span>
@@ -343,9 +354,9 @@
     <!-- ============================================================
      SECTION 2 — CASES (unchanged main from 2.cases)
      ============================================================ -->
-    <main id="cases" class="pt-16 pb-24 max-w-7xl mx-auto px-6 sm:px-12">
+    <main id="cases" class="pt-16 pb-24 max-w-7xl mx-auto px-6 sm:px-12 scroll-mt-14">
         <!-- Section Header -->
-        <div class="mb-12 max-w-3xl border-l-2 border-primary-container pl-8 py-1">
+        <div class="mb-12 max-w-3xl border-l-2 border-primary-container pl-4 md:pl-8 py-1">
             <h1 class="font-headline text-3xl md:text-5xl text-on-surface tracking-tight mb-3 leading-[0.95]">The
                 deployed <br />
                 <span class="italic text-on-surface-variant font-light">Works</span>
@@ -364,7 +375,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <!-- Case Card 1: XPeng -->
                 <article
-                    class="bg-surface-container-high rounded-xl p-8 shadow-[0_20px_40px_rgba(27,28,26,0.04)] relative group transition-transform duration-500 hover:-translate-y-1">
+                    class="bg-surface-container-high rounded-xl p-5 md:p-8 shadow-[0_20px_40px_rgba(27,28,26,0.04)] relative group transition-transform duration-500 hover:-translate-y-1">
                     <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     <div class="relative z-10 flex flex-col h-full">
                         <div class="flex items-center justify-between mb-3">
@@ -400,7 +411,7 @@
                 </article>
                 <!-- Case Card 2: BMW -->
                 <article
-                    class="bg-surface-container-high rounded-xl p-8 shadow-[0_20px_40px_rgba(27,28,26,0.04)] relative group transition-transform duration-500 hover:-translate-y-1">
+                    class="bg-surface-container-high rounded-xl p-5 md:p-8 shadow-[0_20px_40px_rgba(27,28,26,0.04)] relative group transition-transform duration-500 hover:-translate-y-1">
                     <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     <div class="relative z-10 flex flex-col h-full">
                         <div class="flex items-center justify-between mb-3">
@@ -514,26 +525,25 @@
     <!-- ============================================================
      SECTION 3 — PHILOSOPHY (unchanged main from 4.philosophy)
      ============================================================ -->
-    <main
-        class="flex-grow flex items-center justify-center relative w-full px-8 md:px-24 py-16 bg-surface-container-low">
+    <main id="philosophy"
+        class="flex-grow flex items-center justify-center relative w-full px-8 md:px-24 py-16 bg-surface-container-low scroll-mt-14">
         <!-- Subtle gradient orb for ambient warmth -->
         <div
-            class="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-primary-container/5 rounded-full blur-[100px] pointer-events-none">
+            class="absolute top-1/4 left-1/4 w-[200px] h-[200px] md:w-[600px] md:h-[600px] bg-primary-container/5 rounded-full blur-[100px] pointer-events-none">
         </div>
         <div
-            class="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-tertiary-container/5 rounded-full blur-[120px] pointer-events-none">
+            class="absolute bottom-1/4 right-1/4 w-[180px] h-[180px] md:w-[500px] md:h-[500px] bg-tertiary-container/5 rounded-full blur-[120px] pointer-events-none">
         </div>
         <div class="max-w-4xl mx-auto relative z-10 text-center">
             <blockquote class="text-on-surface tracking-tight">
                 <div class="flex flex-col gap-8">
                     <h2
-                        class="font-headline text-3xl md:text-4xl tracking-tight leading-tight md:leading-tight italic font-light bg-gradient-to-r from-on-surface via-primary to-on-surface bg-clip-text text-transparent">
+                        class="font-headline text-2xl md:text-4xl tracking-tight leading-tight italic font-light bg-gradient-to-r from-on-surface via-primary to-on-surface bg-clip-text text-transparent">
                         Technology should disappear into the way people already work.
                     </h2>
                     <div class="flex flex-col gap-1 max-w-2xl mx-auto">
                         <p class="font-body text-sm md:text-base text-on-surface-variant leading-relaxed font-normal">
-                            I architect AI systems that eliminate friction—removing the drain,<br>
-                            so your team can focus on what remains:
+                            I architect AI systems that eliminate friction—removing the drain, so your team can focus on what remains:
                         </p>
                         <p class="font-headline text-base md:text-lg text-primary italic font-light">
                             to create, connect, and decide.
@@ -547,7 +557,7 @@
     <!-- ============================================================
      SECTION 4 — SERVICES (unchanged main from 3.services)
      ============================================================ -->
-    <main class="flex-grow pt-16 pb-16">
+    <main id="services" class="flex-grow pt-16 pb-16 scroll-mt-14">
         <div class="max-w-7xl mx-auto px-6 lg:px-12 relative flex flex-col gap-12">
             <!-- Section Header -->
             <div class="border-l-2 border-primary-container pl-8 py-1">
@@ -643,8 +653,8 @@
     <!-- ============================================================
      SECTION 5 — CONTACT (unchanged main from 5.contact)
      ============================================================ -->
-    <main
-        class="flex-grow pt-16 pb-16 px-8 md:px-16 max-w-screen-2xl mx-auto w-full flex flex-col md:flex-row gap-10 md:gap-24 items-stretch">
+    <main id="about"
+        class="flex-grow pt-16 pb-16 px-8 md:px-16 max-w-screen-2xl mx-auto w-full flex flex-col md:flex-row gap-10 md:gap-24 items-stretch scroll-mt-14">
         <!-- Left: Name -->
         <section class="w-full md:w-1/2 flex flex-col gap-6">
             <h1 class="font-headline text-3xl md:text-4xl font-light tracking-tight text-on-surface leading-tight">
@@ -667,7 +677,7 @@
         </section>
         <!-- Right: Contact rows, aligned to bottom -->
         <section class="w-full md:w-1/2 flex flex-col justify-end gap-0 border-t border-outline-variant/20">
-            <a class="group flex justify-between items-center px-3 py-4 border-b border-outline-variant/20 hover:bg-primary/[0.04] transition-all duration-300 -mx-3"
+            <a class="group flex justify-between items-center px-3 py-4 border-b border-outline-variant/20 hover:bg-primary/[0.04] transition-all duration-300"
                 href="mailto:wuyaqi.yin@gmail.com">
                 <span class="font-label text-xs tracking-[0.1em] text-on-surface-variant uppercase">Direct Inquiry</span>
                 <div class="flex items-center gap-2">
@@ -675,7 +685,7 @@
                     <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300 text-base">north_east</span>
                 </div>
             </a>
-            <a class="group flex justify-between items-center px-3 py-4 border-b border-outline-variant/20 hover:bg-primary/[0.04] transition-all duration-300 -mx-3"
+            <a class="group flex justify-between items-center px-3 py-4 border-b border-outline-variant/20 hover:bg-primary/[0.04] transition-all duration-300"
                 href="https://www.linkedin.com/in/wuyaqi-y-47b319113/" target="_blank" rel="noopener">
                 <span class="font-label text-xs tracking-[0.1em] text-on-surface-variant uppercase">Professional Network</span>
                 <div class="flex items-center gap-2">
@@ -683,7 +693,7 @@
                     <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300 text-base">north_east</span>
                 </div>
             </a>
-            <a class="group flex justify-between items-center px-3 py-4 border-b border-outline-variant/20 hover:bg-primary/[0.04] transition-all duration-300 -mx-3"
+            <a class="group flex justify-between items-center px-3 py-4 border-b border-outline-variant/20 hover:bg-primary/[0.04] transition-all duration-300"
                 href="https://zcal.co/wuyaqi-yin" target="_blank" rel="noopener" data-book-link>
                 <span class="font-label text-xs tracking-[0.1em] text-primary/70 uppercase">Available for Projects</span>
                 <div class="flex items-center gap-2">
@@ -697,7 +707,7 @@
     <!-- ============================================================
      FOOTER — from 5.contact (unchanged)
      ============================================================ -->
-    <footer class="w-full mt-4 bg-[#f5f3ef] dark:bg-[#121211] px-12 py-4 border-t border-[#dbc1bb]/10">
+    <footer class="w-full mt-4 bg-[#f5f3ef] dark:bg-[#121211] px-5 md:px-12 py-4 border-t border-[#dbc1bb]/10">
         <p class="font-['Manrope'] text-xs tracking-[0.2em] uppercase text-[#55433e]/60 dark:text-[#e4e2de]/60">
             © 2026 Wuyaqi Yin · Designed by logic. Built with warmth.
         </p>
@@ -791,6 +801,49 @@
 
             window.addEventListener('scroll', updateHighlight, { passive: true });
             updateHighlight();
+        });
+    </script>
+
+    <script>
+        document.getElementById('see-the-work-btn').addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.getElementById('cases');
+            if (!target) return;
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    </script>
+
+    <script>
+        // Smooth scroll for all nav links (desktop + mobile)
+        document.querySelectorAll('.nav-scroll-link, .mobile-nav-link').forEach(link => {
+            link.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (!href || !href.startsWith('#')) return;
+                const target = document.querySelector(href);
+                if (!target) return;
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const menuIcon = document.getElementById('mobile-menu-icon');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            const isOpen = !mobileMenu.classList.contains('hidden');
+            mobileMenu.classList.toggle('hidden', isOpen);
+            mobileMenu.classList.toggle('flex', !isOpen);
+            menuIcon.textContent = isOpen ? 'menu' : 'close';
+        });
+
+        // 点击菜单项后关闭
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('flex');
+                menuIcon.textContent = 'menu';
+            });
         });
     </script>
 
