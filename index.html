@@ -557,10 +557,59 @@
     <!-- ============================================================
      SECTION 4 — SERVICES (unchanged main from 3.services)
      ============================================================ -->
-    <main id="services" class="flex-grow pt-16 pb-16 scroll-mt-14">
-        <div class="max-w-7xl mx-auto px-6 lg:px-12 relative flex flex-col gap-12">
+    <!--
+    ┌─────────────────────────────────────────────────────────────────────┐
+    │  3D DESIGNER INTEGRATION GUIDE — SECTION 4 (Services)              │
+    │                                                                     │
+    │  CONCEPT                                                            │
+    │  One continuous scroll-driven 3D animation that plays as the user  │
+    │  scrolls down through the three phases, and reverses on scroll up. │
+    │                                                                     │
+    │  CANVAS MOUNT POINT                                                 │
+    │  Mount a single <canvas> inside #s4-canvas-mount (below).          │
+    │  It should fill the container: width=100%, height=100%.            │
+    │  Use position:absolute so text content layers on top.              │
+    │                                                                     │
+    │  SCROLL INTERFACE                                                   │
+    │  A global `window.s4ScrollProgress` (0.0 → 1.0) is updated by     │
+    │  the page scroll handler whenever S4 is in view.                   │
+    │  0.00–0.33 → Phase 1 "See Clearly"                                 │
+    │  0.33–0.66 → Phase 2 "Think Together"                              │
+    │  0.66–1.00 → Phase 3 "Build It"                                    │
+    │  Poll this value in your requestAnimationFrame loop, or subscribe  │
+    │  via: window.addEventListener('s4progress', e => e.detail.value)   │
+    │                                                                     │
+    │  VISUAL DIRECTION                                                   │
+    │  - Palette: warm off-white #fbf9f5, terracotta accent #94422e      │
+    │  - Feel: structural, minimal line-art / mesh — NOT sci-fi blue     │
+    │  - The canvas background should be transparent (alpha channel)     │
+    │    so the section's own bg-surface color shows through             │
+    │                                                                     │
+    │  RECOMMENDED STACK                                                  │
+    │  Three.js r160+ · GSAP ScrollTrigger (already available globally   │
+    │  if you add it) · or pure rAF with the s4ScrollProgress value      │
+    │                                                                     │
+    │  TOUCH / MOBILE                                                     │
+    │  Canvas is hidden on mobile (md:block). Text-only layout on small  │
+    │  screens — no need to handle canvas resize below 768px.            │
+    └─────────────────────────────────────────────────────────────────────┘
+    -->
+    <main id="services" class="flex-grow pt-16 pb-16 scroll-mt-14 relative">
+
+        <!--
+        ═══════════════════════════════════════════════════════════════
+        3D CANVAS MOUNT — desktop only
+        Add your <canvas> here. Keep position:absolute, inset-0, z-0.
+        Text rows below use position:relative z-10 to stay on top.
+        ═══════════════════════════════════════════════════════════════
+        -->
+        <div id="s4-canvas-mount" class="hidden md:block absolute inset-0 z-0 pointer-events-none overflow-hidden">
+            <!-- Three.js canvas goes here -->
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10 flex flex-col gap-12">
             <!-- Section Header -->
-            <div class="border-l-2 border-primary-container pl-8 py-1">
+            <div class="border-l-2 border-primary-container pl-4 md:pl-8 py-1">
                 <h1 class="font-headline text-3xl md:text-5xl text-on-surface tracking-tight mb-3 leading-[0.95]">
                     The Architecture <br />
                     <span class="italic text-on-surface-variant font-light">of Intelligence</span>
@@ -570,10 +619,10 @@
                 </p>
             </div>
 
-            <!-- Phase Rows: text left, visual right, strictly aligned -->
+            <!-- Phase Rows -->
             <div class="flex flex-col gap-16">
 
-                <!-- Phase 1 -->
+                <!-- Phase 1 — scroll progress 0.00–0.33 -->
                 <div class="flex flex-col md:flex-row gap-10 items-center" id="phase-1-text">
                     <div class="w-full md:w-1/2 flex flex-col gap-3">
                         <h2 class="font-headline text-2xl md:text-3xl text-[#B35A44] tracking-tight">See Clearly</h2>
@@ -586,18 +635,18 @@
                             </p>
                         </div>
                     </div>
-                    <!-- 3D REPLACEMENT ZONE: phase-1-visual → "See Clearly" 3D scene -->
-                    <div class="w-full md:w-1/2 h-56 rounded-xl border border-outline-variant/20 flex items-center justify-center" id="phase-1-visual">
-                        <svg width="180" height="120" viewBox="0 0 180 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-20">
-                            <circle cx="90" cy="60" r="40" stroke="#94422e" stroke-width="1.5"/>
-                            <circle cx="90" cy="60" r="24" stroke="#94422e" stroke-width="1"/>
-                            <line x1="50" y1="60" x2="140" y2="60" stroke="#94422e" stroke-width="1"/>
-                            <line x1="90" y1="20" x2="90" y2="100" stroke="#94422e" stroke-width="1"/>
-                        </svg>
-                    </div>
+                    <!--
+                    RIGHT COLUMN — Phase 1 visual zone (desktop)
+                    The 3D canvas in #s4-canvas-mount covers this area as a background.
+                    At scroll progress 0.00–0.33 the animation should reflect "See Clearly":
+                    suggested motif → a single geometric form emerging from fog / noise,
+                    clarity forming from chaos.
+                    This div is intentionally empty — canvas shows through.
+                    -->
+                    <div class="hidden md:block md:w-1/2 h-56" id="phase-1-visual" aria-hidden="true"></div>
                 </div>
 
-                <!-- Phase 2 -->
+                <!-- Phase 2 — scroll progress 0.33–0.66 -->
                 <div class="flex flex-col md:flex-row gap-10 items-center" id="phase-2-text">
                     <div class="w-full md:w-1/2 flex flex-col gap-3">
                         <h2 class="font-headline text-2xl md:text-3xl text-[#B35A44] tracking-tight">Think Together</h2>
@@ -610,19 +659,15 @@
                             </p>
                         </div>
                     </div>
-                    <!-- 3D REPLACEMENT ZONE: phase-2-visual → "Think Together" 3D scene -->
-                    <div class="w-full md:w-1/2 h-56 rounded-xl border border-outline-variant/20 flex items-center justify-center" id="phase-2-visual">
-                        <svg width="180" height="120" viewBox="0 0 180 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-20">
-                            <rect x="20" y="40" width="40" height="40" rx="4" stroke="#94422e" stroke-width="1.5"/>
-                            <rect x="70" y="20" width="40" height="40" rx="4" stroke="#94422e" stroke-width="1.5"/>
-                            <rect x="120" y="40" width="40" height="40" rx="4" stroke="#94422e" stroke-width="1.5"/>
-                            <line x1="60" y1="60" x2="70" y2="40" stroke="#94422e" stroke-width="1"/>
-                            <line x1="110" y1="40" x2="120" y2="60" stroke="#94422e" stroke-width="1"/>
-                        </svg>
-                    </div>
+                    <!--
+                    RIGHT COLUMN — Phase 2 visual zone (desktop)
+                    At scroll progress 0.33–0.66 the animation should reflect "Think Together":
+                    suggested motif → multiple nodes forming connections, a network converging.
+                    -->
+                    <div class="hidden md:block md:w-1/2 h-56" id="phase-2-visual" aria-hidden="true"></div>
                 </div>
 
-                <!-- Phase 3 -->
+                <!-- Phase 3 — scroll progress 0.66–1.00 -->
                 <div class="flex flex-col md:flex-row gap-10 items-center" id="phase-3-text">
                     <div class="w-full md:w-1/2 flex flex-col gap-3">
                         <h2 class="font-headline text-2xl md:text-3xl text-[#B35A44] tracking-tight">Build It</h2>
@@ -635,15 +680,12 @@
                             </p>
                         </div>
                     </div>
-                    <!-- 3D REPLACEMENT ZONE: phase-3-visual → "Build It" 3D scene -->
-                    <div class="w-full md:w-1/2 h-56 rounded-xl border border-outline-variant/20 flex items-center justify-center" id="phase-3-visual">
-                        <svg width="180" height="120" viewBox="0 0 180 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-20">
-                            <polyline points="20,90 60,40 100,65 140,25 160,40" stroke="#94422e" stroke-width="1.5" fill="none"/>
-                            <circle cx="60" cy="40" r="4" fill="#94422e"/>
-                            <circle cx="100" cy="65" r="4" fill="#94422e"/>
-                            <circle cx="140" cy="25" r="4" fill="#94422e"/>
-                        </svg>
-                    </div>
+                    <!--
+                    RIGHT COLUMN — Phase 3 visual zone (desktop)
+                    At scroll progress 0.66–1.00 the animation should reflect "Build It":
+                    suggested motif → structure fully assembled, a complete architecture in motion.
+                    -->
+                    <div class="hidden md:block md:w-1/2 h-56" id="phase-3-visual" aria-hidden="true"></div>
                 </div>
 
             </div>
@@ -814,6 +856,10 @@
     </script>
 
     <script>
+        // 禁用浏览器滚动恢复，确保每次进入页面都从顶部开始
+        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+        window.addEventListener('load', () => window.scrollTo(0, 0));
+
         // Smooth scroll for all nav links (desktop + mobile)
         document.querySelectorAll('.nav-scroll-link, .mobile-nav-link').forEach(link => {
             link.addEventListener('click', function (e) {
@@ -822,6 +868,7 @@
                 const target = document.querySelector(href);
                 if (!target) return;
                 e.preventDefault();
+                // 不写 hash 到 URL，避免刷新时跳到锚点
                 target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
@@ -845,6 +892,37 @@
                 menuIcon.textContent = 'menu';
             });
         });
+    </script>
+
+    <!--
+    ═══════════════════════════════════════════════════════════════════
+    3D SCROLL INTERFACE — for the 3D designer
+    Reads S4's position in the viewport and exposes two things:
+      1. window.s4ScrollProgress  (Number 0.0–1.0, updated every frame)
+      2. CustomEvent 's4progress' on window, detail: { value: 0.0–1.0 }
+    Your Three.js loop can either poll window.s4ScrollProgress directly
+    or listen to the event — use whichever fits your setup.
+    ═══════════════════════════════════════════════════════════════════
+    -->
+    <script>
+        window.s4ScrollProgress = 0;
+
+        function updateS4Progress() {
+            const s4 = document.getElementById('services');
+            if (!s4) return;
+            const rect = s4.getBoundingClientRect();
+            const total = rect.height - window.innerHeight;
+            if (total <= 0) return;
+            const scrolled = Math.max(0, -rect.top);
+            const progress = Math.min(1, scrolled / total);
+            if (progress !== window.s4ScrollProgress) {
+                window.s4ScrollProgress = progress;
+                window.dispatchEvent(new CustomEvent('s4progress', { detail: { value: progress } }));
+            }
+        }
+
+        window.addEventListener('scroll', updateS4Progress, { passive: true });
+        window.addEventListener('resize', updateS4Progress, { passive: true });
     </script>
 
 </body>
