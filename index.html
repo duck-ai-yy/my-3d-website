@@ -231,6 +231,24 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+
+        /* horizontal card scroller — 一行约 3 个 + 第 4 个露头,scroll-snap 对齐 */
+        .h-scroller {
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 0.5rem;
+            -webkit-overflow-scrolling: touch;
+        }
+        .h-scroller > article {
+            flex: 0 0 auto;
+            width: 29%;
+            scroll-snap-align: start;
+        }
+        @media (max-width: 640px) {
+            .h-scroller > article { width: 80%; }
+        }
     </style>
     <style>
         /* Services section styles */
@@ -449,28 +467,196 @@
             <div class="flex items-center gap-4 mb-8">
                 <h2 class="font-body text-sm font-bold tracking-[0.1em] uppercase text-primary">Personal Cases</h2>
                 <div class="flex-1 h-[1px] bg-outline-variant opacity-30"></div>
+                <span class="shrink-0 inline-flex items-center gap-1 font-body text-xs text-outline/60 uppercase tracking-[0.1em]">swipe <span class="material-symbols-outlined text-sm">arrow_forward</span></span>
             </div>
-            <!-- 3-column grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
-                <!-- Case Card 1 -->
+            <!-- horizontal scroller: 3 visible + 4th peeking -->
+            <div class="h-scroller no-scrollbar">
+                <!-- Build: 5-Agent Dev Team (agent-playbook) -->
+                <article class="bg-surface-container-low rounded-xl p-8 relative group transition-transform duration-500 hover:-translate-y-1">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="relative z-10">
+                        <div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center mb-4">
+                            <span class="material-symbols-outlined text-primary text-lg">hub</span>
+                        </div>
+                        <h3 class="font-headline text-xl text-on-surface mb-3">5-Agent Dev Team</h3>
+                        <ul class="space-y-1 font-body text-on-surface-variant leading-relaxed text-sm">
+                            <li class="flex items-start gap-2"><span class="text-primary mt-0.5">·</span>PM, designer, engineers, QA — all agents</li>
+                            <li class="flex items-start gap-2"><span class="text-primary mt-0.5">·</span>Each plays its role; you stay in the loop</li>
+                            <li class="flex items-start gap-2"><span class="text-primary mt-0.5">·</span>The harness I reuse to build everything else</li>
+                        </ul>
+                        <div class="flex flex-wrap gap-1.5 mt-4">
+                            <span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant text-[11px] font-medium rounded-full">Harness engineering</span>
+                            <span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant text-[11px] font-medium rounded-full">Self-evolving</span>
+                            <span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant text-[11px] font-medium rounded-full">Multi-agent architecture</span>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-outline-variant/20">
+                            <span class="inline-flex items-center gap-1 text-xs text-outline/70 font-medium">Private · on request</span>
+                        </div>
+                    </div>
+                </article>
+                <!-- 0→1 Build: HEALER -->
+                <article class="bg-surface-container-low rounded-xl p-8 relative group transition-transform duration-500 hover:-translate-y-1">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="relative z-10">
+                        <div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center mb-4">
+                            <span class="material-symbols-outlined text-primary text-lg">spa</span>
+                        </div>
+                        <h3 class="font-headline text-xl text-on-surface mb-3">和缓 · HEALER</h3>
+                        <ul class="space-y-1 font-body text-on-surface-variant leading-relaxed text-sm">
+                            <li class="flex items-start gap-2"><span class="text-primary mt-0.5">·</span>Apple Health → a longitudinal TCM "digital twin"</li>
+                            <li class="flex items-start gap-2"><span class="text-primary mt-0.5">·</span>A deterministic engine scores; the LLM only narrates</li>
+                            <li class="flex items-start gap-2"><span class="text-primary mt-0.5">·</span>Detects long-term drift, never one-shot guesses</li>
+                        </ul>
+                        <div class="flex flex-wrap gap-1.5 mt-4">
+                            <span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant text-[11px] font-medium rounded-full">Long-horizon agent</span>
+                            <span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant text-[11px] font-medium rounded-full">Continual personalization</span>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-outline-variant/20">
+                            <span class="inline-flex items-center gap-1 text-xs text-outline/70 font-medium">Private · on request</span>
+                        </div>
+                    </div>
+                </article>
+                <!-- 0→1 Build: CogniSell -->
+                <article class="bg-surface-container-low rounded-xl p-8 relative group transition-transform duration-500 hover:-translate-y-1">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="relative z-10">
+                        <div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center mb-4">
+                            <span class="material-symbols-outlined text-primary text-lg">insights</span>
+                        </div>
+                        <h3 class="font-headline text-xl text-on-surface mb-3">CogniSell</h3>
+                        <ul class="space-y-1 font-body text-on-surface-variant leading-relaxed text-sm">
+                            <li class="flex items-start gap-2"><span class="text-primary mt-0.5">·</span>Customer memory as an auditable knowledge graph</li>
+                            <li class="flex items-start gap-2"><span class="text-primary mt-0.5">·</span>Rejected vector RAG for a cognitive state machine</li>
+                            <li class="flex items-start gap-2"><span class="text-primary mt-0.5">·</span>Beliefs evolve: proposed → confirmed → retired</li>
+                        </ul>
+                        <div class="flex flex-wrap gap-1.5 mt-4">
+                            <span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant text-[11px] font-medium rounded-full">Self-evolving memory</span>
+                            <span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant text-[11px] font-medium rounded-full">Knowledge graph</span>
+                            <span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant text-[11px] font-medium rounded-full">Proactive agent</span>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-outline-variant/20">
+                            <span class="inline-flex items-center gap-1 text-xs text-outline/70 font-medium">Private · on request</span>
+                        </div>
+                    </div>
+                </article>
+                <!-- 0→1 Build: Co-Read -->
+                <article class="bg-surface-container-low rounded-xl p-8 relative group transition-transform duration-500 hover:-translate-y-1">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="relative z-10">
+                        <div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center mb-4">
+                            <span class="material-symbols-outlined text-primary text-lg">auto_stories</span>
+                        </div>
+                        <h3 class="font-headline text-xl text-on-surface mb-3">Co-Read</h3>
+                        <ul class="space-y-1 font-body text-on-surface-variant leading-relaxed text-sm">
+                            <li class="flex items-start gap-2"><span class="text-primary mt-0.5">·</span>Discuss a paper while you read; annotate by highlight</li>
+                            <li class="flex items-start gap-2"><span class="text-primary mt-0.5">·</span>Every claim anchored to verbatim source, or none</li>
+                            <li class="flex items-start gap-2"><span class="text-primary mt-0.5">·</span>Topic = caching boundary = note boundary</li>
+                        </ul>
+                        <div class="flex flex-wrap gap-1.5 mt-4">
+                            <span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant text-[11px] font-medium rounded-full">AI-assisted research</span>
+                            <span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant text-[11px] font-medium rounded-full">Context engineering</span>
+                            <span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant text-[11px] font-medium rounded-full">KV caching</span>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-outline-variant/20">
+                            <a href="https://co-read-web.onrender.com/" target="_blank" class="inline-flex items-center gap-1 text-xs text-on-surface-variant font-medium hover:text-primary transition-colors group/link">
+                                Live demo <span class="material-symbols-outlined text-xs transition-transform group-hover/link:translate-x-0.5">arrow_forward</span>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                <!-- 0→1 Build: City Wallet -->
+                <article class="bg-surface-container-low rounded-xl p-8 relative group transition-transform duration-500 hover:-translate-y-1">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="relative z-10">
+                        <div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center mb-4">
+                            <span class="material-symbols-outlined text-primary text-lg">account_balance_wallet</span>
+                        </div>
+                        <h3 class="font-headline text-xl text-on-surface mb-3">City Wallet</h3>
+                        <ul class="space-y-1 font-body text-on-surface-variant leading-relaxed text-sm">
+                            <li class="flex items-start gap-2"><span class="text-primary mt-0.5">·</span>Real-time hyper-personalized local offers</li>
+                            <li class="flex items-start gap-2"><span class="text-primary mt-0.5">·</span>An on-device SLM only picks; code assembles the UI</li>
+                            <li class="flex items-start gap-2"><span class="text-primary mt-0.5">·</span>No hallucination can reach the interface</li>
+                        </ul>
+                        <div class="flex flex-wrap gap-1.5 mt-4">
+                            <span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant text-[11px] font-medium rounded-full">On-device SLM</span>
+                            <span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant text-[11px] font-medium rounded-full">Intent understanding</span>
+                            <span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant text-[11px] font-medium rounded-full">GenUI</span>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-outline-variant/20">
+                            <a href="https://github.com/duck-ai-yy/city-wallet" target="_blank" class="inline-flex items-center gap-1 text-xs text-on-surface-variant font-medium hover:text-primary transition-colors group/link">
+                                Read case <span class="material-symbols-outlined text-xs transition-transform group-hover/link:translate-x-0.5">arrow_forward</span>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                <!-- 0→1 Build: JobPilot (升级自旧 Job Search 卡) -->
                 <article class="bg-surface-container-low rounded-xl p-8 relative group transition-transform duration-500 hover:-translate-y-1">
                     <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     <div class="relative z-10">
                         <div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center mb-4">
                             <span class="material-symbols-outlined text-primary text-lg">work</span>
                         </div>
-                        <h3 class="font-headline text-xl text-on-surface mb-3">Job Search AI Native App</h3>
-                        <p class="font-body text-on-surface-variant leading-relaxed text-sm">
-                            <ul class="space-y-1 font-body text-on-surface-variant leading-relaxed text-sm">
-                                <li class="flex items-start gap-2"><span class="text-primary mt-0.5">·</span>Scans every JD on the market</li>
-                                <li class="flex items-start gap-2"><span class="text-primary mt-0.5">·</span>Matches against your CV</li>
-                                <li class="flex items-start gap-2"><span class="text-primary mt-0.5">·</span>Pushes the top 10 to your inbox</li>
-                            </ul>
-                        </p>
+                        <h3 class="font-headline text-xl text-on-surface mb-3">JobPilot</h3>
+                        <ul class="space-y-1 font-body text-on-surface-variant leading-relaxed text-sm">
+                            <li class="flex items-start gap-2"><span class="text-primary mt-0.5">·</span>Scans every JD, scores it against your CV</li>
+                            <li class="flex items-start gap-2"><span class="text-primary mt-0.5">·</span>Two-stage routing: cheap filter → deep analysis</li>
+                            <li class="flex items-start gap-2"><span class="text-primary mt-0.5">·</span>Runs unattended daily on a deterministic harness</li>
+                        </ul>
+                        <div class="flex flex-wrap gap-1.5 mt-4">
+                            <span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant text-[11px] font-medium rounded-full">Long-horizon agent</span>
+                            <span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant text-[11px] font-medium rounded-full">Automation workflow</span>
+                        </div>
                         <div class="mt-4 pt-3 border-t border-outline-variant/20">
-                            <span class="inline-flex items-center gap-1 text-xs text-on-surface-variant font-medium hover:text-primary transition-colors group/link cursor-pointer">
+                            <span class="inline-flex items-center gap-1 text-xs text-outline/70 font-medium">Private · on request</span>
+                        </div>
+                    </div>
+                </article>
+                <!-- 0→1 Build: ding-ding -->
+                <article class="bg-surface-container-low rounded-xl p-8 relative group transition-transform duration-500 hover:-translate-y-1">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="relative z-10">
+                        <div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center mb-4">
+                            <span class="material-symbols-outlined text-primary text-lg">graphic_eq</span>
+                        </div>
+                        <h3 class="font-headline text-xl text-on-surface mb-3">叮叮嘴替 · DingDing</h3>
+                        <ul class="space-y-1 font-body text-on-surface-variant leading-relaxed text-sm">
+                            <li class="flex items-start gap-2"><span class="text-primary mt-0.5">·</span>Hold a key, speak Chinese, get clean punctuated text</li>
+                            <li class="flex items-start gap-2"><span class="text-primary mt-0.5">·</span>Fully offline — on-device ASR + punctuation, no network</li>
+                            <li class="flex items-start gap-2"><span class="text-primary mt-0.5">·</span>Purpose-built models beat a small local LLM</li>
+                        </ul>
+                        <div class="flex flex-wrap gap-1.5 mt-4">
+                            <span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant text-[11px] font-medium rounded-full">Small-model ASR</span>
+                            <span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant text-[11px] font-medium rounded-full">Multimodal</span>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-outline-variant/20">
+                            <a href="https://github.com/duck-ai-yy/ding-ding-typeless" target="_blank" class="inline-flex items-center gap-1 text-xs text-on-surface-variant font-medium hover:text-primary transition-colors group/link">
                                 Read case <span class="material-symbols-outlined text-xs transition-transform group-hover/link:translate-x-0.5">arrow_forward</span>
-                            </span>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                <!-- 0→1 Build: Zero Note -->
+                <article class="bg-surface-container-low rounded-xl p-8 relative group transition-transform duration-500 hover:-translate-y-1">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="relative z-10">
+                        <div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center mb-4">
+                            <span class="material-symbols-outlined text-primary text-lg">directions_car</span>
+                        </div>
+                        <h3 class="font-headline text-xl text-on-surface mb-3">Zero Note</h3>
+                        <ul class="space-y-1 font-body text-on-surface-variant leading-relaxed text-sm">
+                            <li class="flex items-start gap-2"><span class="text-primary mt-0.5">·</span>Turn any song you love into music that performs as you drive</li>
+                            <li class="flex items-start gap-2"><span class="text-primary mt-0.5">·</span>Speed and pedal become live controls that remix it in real time</li>
+                            <li class="flex items-start gap-2"><span class="text-primary mt-0.5">·</span>No music skills needed — AI handles stems and arrangement</li>
+                        </ul>
+                        <div class="flex flex-wrap gap-1.5 mt-4">
+                            <span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant text-[11px] font-medium rounded-full">Real-time adaptive audio</span>
+                            <span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant text-[11px] font-medium rounded-full">Multimodal</span>
+                            <span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant text-[11px] font-medium rounded-full">Generative audio</span>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-outline-variant/20">
+                            <a href="https://github.com/duck-ai-yy/Zero-Note-Drivable-Music" target="_blank" class="inline-flex items-center gap-1 text-xs text-on-surface-variant font-medium hover:text-primary transition-colors group/link">
+                                Read case <span class="material-symbols-outlined text-xs transition-transform group-hover/link:translate-x-0.5">arrow_forward</span>
+                            </a>
                         </div>
                     </div>
                 </article>
@@ -489,28 +675,10 @@
                                 <li class="flex items-start gap-2"><span class="text-primary mt-0.5">·</span>Runs your social account</li>
                             </ul>
                         </p>
-                        <div class="mt-4 pt-3 border-t border-outline-variant/20">
-                            <span class="inline-flex items-center gap-1 text-xs text-on-surface-variant font-medium hover:text-primary transition-colors group/link cursor-pointer">
-                                Read case <span class="material-symbols-outlined text-xs transition-transform group-hover/link:translate-x-0.5">arrow_forward</span>
-                            </span>
+                        <div class="flex flex-wrap gap-1.5 mt-4">
+                            <span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant text-[11px] font-medium rounded-full">Agentic memory</span>
+                            <span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant text-[11px] font-medium rounded-full">Digital twin</span>
                         </div>
-                    </div>
-                </article>
-                <!-- Case Card 3 -->
-                <article class="bg-surface-container-low rounded-xl p-8 relative group transition-transform duration-500 hover:-translate-y-1">
-                    <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    <div class="relative z-10">
-                        <div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center mb-4">
-                            <span class="material-symbols-outlined text-primary text-lg">hub</span>
-                        </div>
-                        <h3 class="font-headline text-xl text-on-surface mb-3">5-Agent Dev Team</h3>
-                        <p class="font-body text-on-surface-variant leading-relaxed text-sm">
-                            <ul class="space-y-1 font-body text-on-surface-variant leading-relaxed text-sm">
-                                <li class="flex items-start gap-2"><span class="text-primary mt-0.5">·</span>PM, designer, engineers, QA — all agents</li>
-                                <li class="flex items-start gap-2"><span class="text-primary mt-0.5">·</span>Each one plays its role.</li>
-                                <li class="flex items-start gap-2"><span class="text-primary mt-0.5">·</span>You stay in the loop.</li>
-                            </ul>
-                        </p>
                         <div class="mt-4 pt-3 border-t border-outline-variant/20">
                             <span class="inline-flex items-center gap-1 text-xs text-on-surface-variant font-medium hover:text-primary transition-colors group/link cursor-pointer">
                                 Read case <span class="material-symbols-outlined text-xs transition-transform group-hover/link:translate-x-0.5">arrow_forward</span>
@@ -520,6 +688,70 @@
                 </article>
             </div>
         </section>
+    </main>
+
+    <!-- ============================================================
+     SECTION 2.5 — RESEARCH DIRECTION (mapped to DeepSeek Frontier JD)
+     ============================================================ -->
+    <main id="research" class="pt-16 pb-24 max-w-7xl mx-auto px-6 sm:px-12 scroll-mt-14">
+        <div class="mb-12 max-w-3xl border-l-2 border-primary-container pl-4 md:pl-8 py-1">
+            <p class="font-body text-sm font-bold tracking-[0.1em] uppercase text-primary mb-3">Research Direction</p>
+            <h1 class="font-headline text-3xl md:text-5xl text-on-surface tracking-tight mb-4 leading-[0.95]">Toward the <span class="italic text-on-surface-variant font-light">next paradigm</span></h1>
+            <p class="font-body text-base text-on-surface-variant leading-relaxed max-w-2xl">
+                Beyond scaling, the pieces AGI may still be missing — memory that actually accumulates, systems that evolve themselves, agents that can run their own research, and a clear sense of where a model's competence ends. I don't just believe in these directions; I've shipped something running in each.
+            </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
+            <div class="border-t border-outline-variant/20 pt-4">
+                <h3 class="font-headline text-lg text-on-surface mb-1">How memory accumulates & stays auditable</h3>
+                <p class="font-body text-sm text-on-surface-variant leading-relaxed mb-3">Not vector similarity over a black box — an auditable structure whose beliefs evolve through explicit states. I build it as a cognitive state machine on a knowledge graph.</p>
+                <div class="flex flex-wrap gap-1.5">
+                    <span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant text-[11px] font-medium rounded-full">CogniSell</span>
+                    <span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant text-[11px] font-medium rounded-full">HEALER</span>
+                </div>
+            </div>
+            <div class="border-t border-outline-variant/20 pt-4">
+                <h3 class="font-headline text-lg text-on-surface mb-1">How a system evolves itself</h3>
+                <p class="font-body text-sm text-on-surface-variant leading-relaxed mb-3">Self-evolution starts at the harness layer — a system that distills its own experience and routes it back in, before any weights change.</p>
+                <div class="flex flex-wrap gap-1.5">
+                    <span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant text-[11px] font-medium rounded-full">agent-playbook</span>
+                    <span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant text-[11px] font-medium rounded-full">CogniSell</span>
+                </div>
+            </div>
+            <div class="border-t border-outline-variant/20 pt-4">
+                <h3 class="font-headline text-lg text-on-surface mb-1">How agents stay reliable over long horizons</h3>
+                <p class="font-body text-sm text-on-surface-variant leading-relaxed mb-3">Long-horizon autonomy comes from a deterministic harness and proactive triggers — cost gates, idempotency and scheduled check-ins carry the state, not the model's whims.</p>
+                <div class="flex flex-wrap gap-1.5">
+                    <span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant text-[11px] font-medium rounded-full">JobPilot</span>
+                    <span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant text-[11px] font-medium rounded-full">HEALER</span>
+                </div>
+            </div>
+            <div class="border-t border-outline-variant/20 pt-4">
+                <h3 class="font-headline text-lg text-on-surface mb-1">How AI actually does research</h3>
+                <p class="font-body text-sm text-on-surface-variant leading-relaxed mb-3">Only if every claim is anchored to verbatim source, hallucination is structurally blocked, and context stays bounded — caching boundaries doubling as note boundaries.</p>
+                <div class="flex flex-wrap gap-1.5">
+                    <span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant text-[11px] font-medium rounded-full">Co-Read</span>
+                    <span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant text-[11px] font-medium rounded-full">Theoria</span>
+                </div>
+            </div>
+            <div class="border-t border-outline-variant/20 pt-4">
+                <h3 class="font-headline text-lg text-on-surface mb-1">How to know & hold the model's limits</h3>
+                <p class="font-body text-sm text-on-surface-variant leading-relaxed mb-3">Knowing where competence ends is its own skill — constrain the model to choices it's reliable at, and let small purpose-built models keep the rest out of the system.</p>
+                <div class="flex flex-wrap gap-1.5">
+                    <span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant text-[11px] font-medium rounded-full">City Wallet</span>
+                    <span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant text-[11px] font-medium rounded-full">DingDing</span>
+                </div>
+            </div>
+            <div class="border-t border-outline-variant/20 pt-4">
+                <h3 class="font-headline text-lg text-on-surface mb-1">How models keep learning after deployment</h3>
+                <p class="font-body text-sm text-on-surface-variant leading-relaxed mb-3">The direction I'm actively exploring — continual learning and self-distillation at the weight level, where memory stops being context and starts reshaping the model itself.</p>
+                <div class="flex flex-wrap gap-1.5">
+                    <span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant text-[11px] font-medium rounded-full">Continual learning</span>
+                    <span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant text-[11px] font-medium rounded-full">Self-distillation</span>
+                    <span class="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant text-[11px] font-medium rounded-full">PEFT</span>
+                </div>
+            </div>
+        </div>
     </main>
 
     <!-- ============================================================
